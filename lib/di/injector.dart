@@ -28,4 +28,22 @@ class Injector {
   T getNewBloc<T extends BaseBloC>() => container.resolve();
 
   T getDependency<T>() => container.resolve();
+
+  static initDemo() {
+    if (instance == null) {
+      instance = Injector._demo();
+    }
+  }
+
+  Injector._demo() {
+    _registerCommon();
+  }
+
+  _registerCommon() {
+    if (isInDebugMode())
+      container.registerSingleton<Logger, LoggerImpl>((c) => LoggerImpl());
+    else
+      container
+          .registerSingleton<Logger, LoggerEmptyImpl>((c) => LoggerEmptyImpl());
+  }
 }
