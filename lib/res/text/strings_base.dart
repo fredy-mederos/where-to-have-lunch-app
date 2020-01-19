@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 
+//en
 class StringsBase implements WidgetsLocalizations {
   @override
   TextDirection get textDirection => TextDirection.ltr;

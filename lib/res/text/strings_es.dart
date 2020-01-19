@@ -1,4 +1,4 @@
-import 'package:where_to_have_lunch/text/strings_base.dart';
+import 'package:where_to_have_lunch/res/text/strings_base.dart';
 
 class StringsEs extends StringsBase{
   @override

@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:where_to_have_lunch/text/strings_base.dart';
-import 'package:where_to_have_lunch/text/strings_es.dart';
+import 'package:where_to_have_lunch/res/text/strings_base.dart';
+import 'package:where_to_have_lunch/res/text/strings_es.dart';
 
 class CustomLocalizationsDelegate extends LocalizationsDelegate<StringsBase> {
 

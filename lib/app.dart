@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:where_to_have_lunch/text/custom_localizations_delegate.dart';
+import 'package:where_to_have_lunch/res/text/custom_localizations_delegate.dart';
 
-import 'R.dart';
+import 'res/R.dart';
 import 'di/injector.dart';
 
 class WhereToHaveLunchApp extends StatelessWidget {

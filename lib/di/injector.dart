@@ -1,6 +1,11 @@
 import 'dart:io';
 
 import 'package:kiwi/kiwi.dart';
+import 'package:where_to_have_lunch/data/firebase/user_repository_firebase_impl.dart';
+import 'package:where_to_have_lunch/domain/repository/user_repository.dart';
+import 'package:where_to_have_lunch/ui/login/login_bloc.dart';
+import 'package:where_to_have_lunch/ui/splash/splash_bloc.dart';
+import 'package:where_to_have_lunch/ui/splash/splash_page.dart';
 import 'package:where_to_have_lunch/utils/logger.dart';
 
 import '../ui/base/bloc_base.dart';
@@ -31,12 +36,25 @@ class Injector {
 
   static initDemo() {
     if (instance == null) {
-      instance = Injector._demo();
+      instance = Injector._start();
     }
   }
 
-  Injector._demo() {
+  Injector._start() {
     _registerCommon();
+    _registerRepositories();
+    _registerBloCs();
+  }
+
+  _registerRepositories() {
+    container.registerSingleton<UserRepository, UserRepositoryFirebaseImpl>(
+      (c) => UserRepositoryFirebaseImpl(c.resolve()),
+    );
+  }
+
+  _registerBloCs() {
+    container.registerFactory((c) => LoginBloC(c.resolve(), c.resolve()));
+    container.registerFactory((c) => SplashBloC(c.resolve()));
   }
 
   _registerCommon() {
