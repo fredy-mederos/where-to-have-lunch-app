@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:where_to_have_lunch/app_routes.dart';
 import 'package:where_to_have_lunch/res/R.dart';
+import 'package:where_to_have_lunch/res/text/icon_button_widget.dart';
 import 'package:where_to_have_lunch/ui/base/big_icon_background_widget.dart';
 import 'package:where_to_have_lunch/ui/base/bloc_state.dart';
 import 'package:where_to_have_lunch/ui/base/on_init_widget.dart';
@@ -70,9 +71,9 @@ class _LoginPageState extends StateWithBloC<LoginPage, LoginBloC> {
         ),
       );
 
-  Widget loginButton({bool isLoading}) => RaisedButton.icon(
-        icon: Icon(MdiIcons.google),
-        label: Text(R.string.loginWithGoogle),
+  Widget loginButton({bool isLoading}) => IconButtonWidget(
+        iconData: MdiIcons.google,
+        label: R.string.loginWithGoogle,
         onPressed: isLoading
             ? null
             : () {

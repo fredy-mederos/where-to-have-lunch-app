@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:where_to_have_lunch/app_routes.dart';
 import 'package:where_to_have_lunch/domain/models/user.dart';
+import 'package:where_to_have_lunch/res/text/icon_button_widget.dart';
 import 'package:where_to_have_lunch/ui/base/bloc_state.dart';
 import 'package:where_to_have_lunch/ui/base/page_background_widget.dart';
 import 'package:where_to_have_lunch/ui/settings/settings_bloc.dart';
@@ -12,7 +13,6 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends StateWithBloC<SettingsPage, SettingsBloC> {
-
   @override
   void initState() {
     super.initState();
@@ -33,9 +33,9 @@ class _SettingsPageState extends StateWithBloC<SettingsPage, SettingsBloC> {
           children: [
             title(),
             Expanded(child: Container()),
-            RaisedButton.icon(
-              icon: Icon(MdiIcons.logout),
-              label: Text("Logout"),
+            IconButtonWidget(
+              iconData: MdiIcons.logout,
+              label: "Logout",
               onPressed: logOut,
             ),
           ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:where_to_have_lunch/res/text/icon_button_widget.dart';
 import 'package:where_to_have_lunch/ui/base/big_icon_background_widget.dart';
 import 'package:where_to_have_lunch/ui/base/page_background_widget.dart';
 
@@ -22,14 +23,14 @@ class _ChoosePagState extends State<ChoosePage> {
         child: Column(
           children: [
             Text(
-              "Choose where to lunch randomly!",
+              "Choose where to have a lunch randomly!",
               style: TextStyle(fontSize: 40),
             ),
             Expanded(child: Container()),
-            RaisedButton.icon(
+            IconButtonWidget(
               onPressed: () {},
-              icon: Icon(MdiIcons.dice5Outline),
-              label: Text("Roll the dice"),
+              iconData: MdiIcons.dice5Outline,
+              label: "Roll the dice",
             ),
           ],
         ),
