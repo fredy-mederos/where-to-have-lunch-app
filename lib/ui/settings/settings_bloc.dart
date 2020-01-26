@@ -6,15 +6,13 @@ import 'package:where_to_have_lunch/ui/base/bloc_base.dart';
 class SettingsBloC implements BaseBloC {
   final UserRepository _userRepository;
 
-  SettingsBloC(this._userRepository) {
-    _loadCurrentUser();
-  }
+  SettingsBloC(this._userRepository);
 
   PublishSubject<User> _currentUserController = PublishSubject();
 
   Stream<User> get currentUserStream => _currentUserController.stream;
 
-  void _loadCurrentUser() async {
+  void loadCurrentUser() async {
     try {
       User user = await _userRepository.currentUser();
       _currentUserController.sinkAddSafe(user);

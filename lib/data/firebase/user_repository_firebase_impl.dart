@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:where_to_have_lunch/data/firebase/user_mapper.dart';
 import 'package:where_to_have_lunch/domain/models/user.dart';
 import 'package:where_to_have_lunch/domain/repository/user_repository.dart';
 import 'package:where_to_have_lunch/utils/logger.dart';
@@ -7,11 +8,11 @@ import 'package:where_to_have_lunch/utils/logger.dart';
 class UserRepositoryFirebaseImpl implements UserRepository {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  User _currentUser;
 
   final Logger logger;
+  final UserMapper mapper;
 
-  UserRepositoryFirebaseImpl(this.logger);
+  UserRepositoryFirebaseImpl(this.logger, this.mapper);
 
   @override
   Future<User> login() async {
@@ -26,18 +27,15 @@ class UserRepositoryFirebaseImpl implements UserRepository {
 
     final FirebaseUser user =
         (await _auth.signInWithCredential(credential)).user;
-    logger.log("signed in " + user.displayName);
 
-    _currentUser = User(name: user.displayName);
-    return _currentUser;
+    return mapper.fromFirebase(user);
   }
 
   @override
   Future<User> currentUser() async {
     try {
       var currentUser = await _auth.currentUser();
-      logger.log(currentUser);
-      return null;
+      return mapper.fromFirebase(currentUser);
     } catch (ex) {
       return null;
     }

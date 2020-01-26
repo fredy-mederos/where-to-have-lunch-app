@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:where_to_have_lunch/app_routes.dart';
 import 'package:where_to_have_lunch/domain/models/user.dart';
-import 'package:where_to_have_lunch/ui/base/big_icon_background_widget.dart';
 import 'package:where_to_have_lunch/ui/base/bloc_state.dart';
 import 'package:where_to_have_lunch/ui/base/page_background_widget.dart';
 import 'package:where_to_have_lunch/ui/settings/settings_bloc.dart';
@@ -13,6 +12,13 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends StateWithBloC<SettingsPage, SettingsBloC> {
+
+  @override
+  void initState() {
+    super.initState();
+    bloc.loadCurrentUser();
+  }
+
   @override
   Widget buildWidget(BuildContext context) {
     return PageBackgroundWidget(
@@ -27,8 +33,9 @@ class _SettingsPageState extends StateWithBloC<SettingsPage, SettingsBloC> {
           children: [
             title(),
             Expanded(child: Container()),
-            RaisedButton(
-              child: Text("Logout"),
+            RaisedButton.icon(
+              icon: Icon(MdiIcons.logout),
+              label: Text("Logout"),
               onPressed: logOut,
             ),
           ],
@@ -39,9 +46,32 @@ class _SettingsPageState extends StateWithBloC<SettingsPage, SettingsBloC> {
       stream: bloc.currentUserStream,
       builder: (context, snapshot) {
         var userName = snapshot.data?.name ?? "";
-        return Text(
-          "Hello $userName!",
-          style: TextStyle(fontSize: 40),
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Icon(
+                  MdiIcons.account,
+                  size: 60,
+                  color: Colors.grey,
+                ),
+                snapshot.data?.photoUrl != null
+                    ? CircleAvatar(
+                        backgroundColor: Colors.transparent,
+                        backgroundImage: NetworkImage(snapshot.data?.photoUrl),
+                        radius: 40,
+                      )
+                    : Container(),
+              ],
+            ),
+            Container(height: 16),
+            Text(
+              "Hello $userName!",
+              style: TextStyle(fontSize: 30),
+            ),
+          ],
         );
       });
 

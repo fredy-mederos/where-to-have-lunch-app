@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:kiwi/kiwi.dart';
+import 'package:where_to_have_lunch/data/firebase/user_mapper.dart';
 import 'package:where_to_have_lunch/data/firebase/user_repository_firebase_impl.dart';
 import 'package:where_to_have_lunch/data/stub/user_repository_stub_impl.dart';
 import 'package:where_to_have_lunch/di/stub_features.dart';
@@ -65,6 +66,7 @@ class Injector {
     _registerCommon();
     _registerRepositories();
     _registerBloCs();
+    _registerMappers();
   }
 
   _registerRepositories() {
@@ -74,8 +76,12 @@ class Injector {
       );
     else
       container.registerSingleton<UserRepository, UserRepositoryFirebaseImpl>(
-        (c) => UserRepositoryFirebaseImpl(c.resolve()),
+        (c) => UserRepositoryFirebaseImpl(c.resolve(), c.resolve()),
       );
+  }
+
+  _registerMappers() {
+    container.registerFactory((c) => UserMapper());
   }
 
   _registerBloCs() {

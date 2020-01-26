@@ -14,7 +14,29 @@ class _PlacesPageState extends State<PlacesPage> {
     return PageBackgroundWidget(
       iconRes: MdiIcons.silverwareVariant,
       rotateAngle: 0,
-      child: Center(child: Text("Places")),
+      child: body(),
     );
+  }
+
+  Widget body() => Padding(
+        padding: const EdgeInsets.only(bottom: 40, right: 16, left: 16),
+        child: Column(
+          children: [
+            Text(
+              "Your Places",
+              style: TextStyle(fontSize: 40),
+            ),
+            Expanded(child: Container()),
+            RaisedButton.icon(
+              icon: Icon(MdiIcons.plus),
+              label: Text("Add Place"),
+              onPressed: addPlace,
+            ),
+          ],
+        ),
+      );
+
+  void addPlace(){
+
   }
 }

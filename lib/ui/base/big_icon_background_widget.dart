@@ -15,9 +15,10 @@ class BigIconBackgroundWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Transform.rotate(
-      angle: rotateAngle,
-      child: Center(
+    return Center(
+      child: Transform.rotate(
+        angle: rotateAngle,
+        alignment: Alignment.center,
         child: Opacity(
           opacity: 0.15,
           child: Icon(
