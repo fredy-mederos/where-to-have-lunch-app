@@ -28,7 +28,7 @@ class ErrorHandlerBloC {
   }
 
   clearError() {
-    _errorMessageController.sinkAddSafe("");
+    _errorMessageController.sinkAddSafe(null);
   }
 
   void disposeErrorHandlerBloC() {

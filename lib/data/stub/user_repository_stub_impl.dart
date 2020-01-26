@@ -12,6 +12,7 @@ class UserRepositoryStubImpl implements UserRepository {
   @override
   Future<User> login() {
     return Future.delayed(Duration(seconds: 2), () {
+      //throw "Login Error";
       _currentUser = User(name: "UserName");
       return _currentUser;
     });
