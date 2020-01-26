@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:where_to_have_lunch/app_routes.dart';
-import 'package:where_to_have_lunch/res/R.dart';
-import 'package:where_to_have_lunch/res/text/icon_button_widget.dart';
+import 'package:where_to_have_lunch/ui/base/icon_button_widget.dart';
 import 'package:where_to_have_lunch/ui/base/page_background_widget.dart';
 
 class PlacesPage extends StatefulWidget {

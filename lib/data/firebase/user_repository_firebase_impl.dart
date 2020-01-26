@@ -6,7 +6,7 @@ import 'package:where_to_have_lunch/domain/repository/user_repository.dart';
 import 'package:where_to_have_lunch/utils/logger.dart';
 
 class UserRepositoryFirebaseImpl implements UserRepository {
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   final Logger logger;
@@ -16,6 +16,8 @@ class UserRepositoryFirebaseImpl implements UserRepository {
 
   @override
   Future<User> login() async {
+    final GoogleSignIn _googleSignIn = GoogleSignIn();
+
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
     final GoogleSignInAuthentication googleAuth =
         await googleUser.authentication;

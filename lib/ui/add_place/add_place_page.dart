@@ -10,16 +10,22 @@ class _AddPlacePageState extends State<AddPlacePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.black, //change your color here
-        ),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: Column(
-        children: [
-          Text("Add A Place",style: TextStyle(fontSize: 40),)
-        ],
+      body: Padding(
+        padding: const EdgeInsets.only(bottom: 40, right: 16, left: 16),
+        child: Column(
+          children: [
+            Text(
+              "Add a Place",
+              style: TextStyle(fontSize: 40),
+            ),
+            Card(
+
+            )
+          ],
+        ),
       ),
     );
   }

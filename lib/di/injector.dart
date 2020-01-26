@@ -1,16 +1,13 @@
-import 'dart:io';
 
 import 'package:kiwi/kiwi.dart';
 import 'package:where_to_have_lunch/data/firebase/user_mapper.dart';
 import 'package:where_to_have_lunch/data/firebase/user_repository_firebase_impl.dart';
 import 'package:where_to_have_lunch/data/stub/user_repository_stub_impl.dart';
-import 'package:where_to_have_lunch/di/stub_features.dart';
 import 'package:where_to_have_lunch/domain/repository/user_repository.dart';
 import 'package:where_to_have_lunch/ui/home/home_bloc.dart';
 import 'package:where_to_have_lunch/ui/login/login_bloc.dart';
 import 'package:where_to_have_lunch/ui/settings/settings_bloc.dart';
 import 'package:where_to_have_lunch/ui/splash/splash_bloc.dart';
-import 'package:where_to_have_lunch/ui/splash/splash_page.dart';
 import 'package:where_to_have_lunch/utils/logger.dart';
 
 import '../ui/base/bloc_base.dart';
@@ -39,11 +36,9 @@ class Injector {
 
   T getDependency<T>() => container.resolve();
 
-  List<StubFeatures> _stubFeatures = [];
-
-  static initDemo({List<StubFeatures> stubFeatures}) {
+  static initDemo() {
     if (instance == null) {
-      instance = Injector._startDemo(stubFeatures: stubFeatures);
+      instance = Injector._startDemo();
     }
   }
 
@@ -53,31 +48,32 @@ class Injector {
     }
   }
 
-  Injector._startDemo({List<StubFeatures> stubFeatures}) {
-    this._stubFeatures = stubFeatures ?? [];
+  Injector._startDemo() {
+    _registerDemo();
     _initialize();
   }
 
   Injector._startProd() {
+    _registerProd();
     _initialize();
   }
 
   _initialize() {
     _registerCommon();
-    _registerRepositories();
     _registerBloCs();
     _registerMappers();
   }
 
-  _registerRepositories() {
-    if (_stubFeatures.contains(StubFeatures.USER))
-      container.registerSingleton<UserRepository, UserRepositoryStubImpl>(
-        (c) => UserRepositoryStubImpl(),
-      );
-    else
-      container.registerSingleton<UserRepository, UserRepositoryFirebaseImpl>(
-        (c) => UserRepositoryFirebaseImpl(c.resolve(), c.resolve()),
-      );
+  _registerDemo() {
+    container.registerSingleton<UserRepository, UserRepositoryStubImpl>(
+      (c) => UserRepositoryStubImpl(),
+    );
+  }
+
+  _registerProd() {
+    container.registerSingleton<UserRepository, UserRepositoryFirebaseImpl>(
+      (c) => UserRepositoryFirebaseImpl(c.resolve(), c.resolve()),
+    );
   }
 
   _registerMappers() {

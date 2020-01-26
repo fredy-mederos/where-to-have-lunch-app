@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class BigIconBackgroundWidget extends StatelessWidget {
   final IconData iconRes;
@@ -15,12 +14,12 @@ class BigIconBackgroundWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Transform.rotate(
-        angle: rotateAngle,
-        alignment: Alignment.center,
-        child: Opacity(
-          opacity: 0.15,
+    return Align(
+      alignment: Alignment.topCenter,
+      child: Opacity(
+        opacity: 0.15,
+        child: Transform.rotate(
+          angle: rotateAngle,
           child: Icon(
             iconRes,
             size: 400,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:where_to_have_lunch/domain/models/user.dart';
 import 'package:where_to_have_lunch/res/R.dart';
 import 'package:where_to_have_lunch/ui/base/bloc_state.dart';
 import 'package:where_to_have_lunch/ui/choose/choose_page.dart';
@@ -22,7 +21,6 @@ class _HomePageState extends StateWithBloC<HomePage, HomeBloC> {
       appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0,),
       body: currentPage(),
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.deepOrange,
         currentIndex: currentIndex,
         onTap: onPageSelected,
         items: [
