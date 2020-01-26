@@ -7,6 +7,7 @@ import 'package:where_to_have_lunch/di/stub_features.dart';
 import 'package:where_to_have_lunch/domain/repository/user_repository.dart';
 import 'package:where_to_have_lunch/ui/home/home_bloc.dart';
 import 'package:where_to_have_lunch/ui/login/login_bloc.dart';
+import 'package:where_to_have_lunch/ui/settings/settings_bloc.dart';
 import 'package:where_to_have_lunch/ui/splash/splash_bloc.dart';
 import 'package:where_to_have_lunch/ui/splash/splash_page.dart';
 import 'package:where_to_have_lunch/utils/logger.dart';
@@ -81,6 +82,7 @@ class Injector {
     container.registerFactory((c) => LoginBloC(c.resolve(), c.resolve()));
     container.registerFactory((c) => SplashBloC(c.resolve()));
     container.registerFactory((c) => HomeBloC());
+    container.registerFactory((c) => SettingsBloC(c.resolve()));
   }
 
   _registerCommon() {

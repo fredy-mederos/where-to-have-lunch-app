@@ -21,5 +21,6 @@ class UserRepositoryStubImpl implements UserRepository {
   @override
   Future logOut() async {
     _currentUser = null;
+    print("Log out");
   }
 }

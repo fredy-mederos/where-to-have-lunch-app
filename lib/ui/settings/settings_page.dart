@@ -1,0 +1,52 @@
+import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:where_to_have_lunch/app_routes.dart';
+import 'package:where_to_have_lunch/domain/models/user.dart';
+import 'package:where_to_have_lunch/ui/base/big_icon_background_widget.dart';
+import 'package:where_to_have_lunch/ui/base/bloc_state.dart';
+import 'package:where_to_have_lunch/ui/base/page_background_widget.dart';
+import 'package:where_to_have_lunch/ui/settings/settings_bloc.dart';
+
+class SettingsPage extends StatefulWidget {
+  @override
+  _SettingsPageState createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends StateWithBloC<SettingsPage, SettingsBloC> {
+  @override
+  Widget buildWidget(BuildContext context) {
+    return PageBackgroundWidget(
+      iconRes: MdiIcons.settings,
+      child: body(),
+    );
+  }
+
+  Widget body() => Padding(
+        padding: const EdgeInsets.only(bottom: 40, right: 16, left: 16),
+        child: Column(
+          children: [
+            title(),
+            Expanded(child: Container()),
+            RaisedButton(
+              child: Text("Logout"),
+              onPressed: logOut,
+            ),
+          ],
+        ),
+      );
+
+  Widget title() => StreamBuilder<User>(
+      stream: bloc.currentUserStream,
+      builder: (context, snapshot) {
+        var userName = snapshot.data?.name ?? "";
+        return Text(
+          "Hello $userName!",
+          style: TextStyle(fontSize: 40),
+        );
+      });
+
+  void logOut() {
+    bloc.logout();
+    Navigator.pushNamedAndRemoveUntil(context, AppRoutes.LOGIN, (_) => false);
+  }
+}

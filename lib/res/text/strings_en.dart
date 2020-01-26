@@ -6,16 +6,18 @@ class StringsEn implements StringsBase {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
   String get appName => "Where To Have Lunch?";
 
-  @override
   String get loginWithGoogle => "Login With Google";
 
-  @override
   String get welcomeMessageBody =>
       "The easiest way of choosing where to have a nice meal with colleges";
 
-  @override
   String get welcomeMessageTitle => "Welcome to \"$appName\"";
+
+  String get places => "Places";
+
+  String get settings => "Settings";
+
+  String get choose => "Choose!";
 }

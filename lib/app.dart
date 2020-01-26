@@ -15,7 +15,7 @@ class WhereToHaveLunchApp extends StatelessWidget {
       title: R.string.appName,
       debugShowCheckedModeBanner: Injector.instance.isInDebugMode(),
       theme: ThemeData(
-        primarySwatch: Colors.grey,
+        primarySwatch: Colors.deepOrange,
         fontFamily: GoogleFonts.poppins().fontFamily,
       ),
       localizationsDelegates: [
