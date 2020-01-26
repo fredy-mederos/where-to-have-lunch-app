@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:where_to_have_lunch/res/text/strings_base.dart';
+import 'package:where_to_have_lunch/res/text/strings_en.dart';
 import 'package:where_to_have_lunch/res/text/strings_es.dart';
 
 class CustomLocalizationsDelegate extends LocalizationsDelegate<StringsBase> {
 
-  static StringsBase stringsBase = StringsBase();
+  static StringsBase stringsBase = StringsEn();
 
   List<Locale> get supportedLocales {
     return const <Locale>[
@@ -18,13 +19,13 @@ class CustomLocalizationsDelegate extends LocalizationsDelegate<StringsBase> {
   Future<StringsBase> load(Locale locale) {
     switch (locale.languageCode) {
       case "en":
-        stringsBase = StringsBase();
+        stringsBase = StringsEn();
         break;
       case "es":
         stringsBase = StringsEs();
         break;
       default:
-        stringsBase = StringsBase();
+        stringsBase = StringsEn();
         break;
     }
     return SynchronousFuture<StringsBase>(stringsBase);

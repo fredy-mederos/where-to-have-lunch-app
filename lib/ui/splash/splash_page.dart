@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:where_to_have_lunch/app_routes.dart';
 import 'package:where_to_have_lunch/ui/base/bloc_state.dart';
-import 'package:where_to_have_lunch/ui/home/man_page.dart';
+import 'package:where_to_have_lunch/ui/home/home_page.dart';
 import 'package:where_to_have_lunch/ui/login/login_page.dart';
 import 'package:where_to_have_lunch/ui/splash/splash_bloc.dart';
 
@@ -15,9 +16,9 @@ class _SplashPageState extends StateWithBloC<SplashPage, SplashBloC> {
     super.initState();
     bloc.isLoggedIn().then((isLoggedIn) {
       if (isLoggedIn) {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (c) => MainPage()));
+        Navigator.pushReplacementNamed(context, AppRoutes.HOME);
       } else {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (c) => LoginPage()));
+        Navigator.pushReplacementNamed(context, AppRoutes.LOGIN);
       }
     });
   }

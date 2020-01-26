@@ -14,7 +14,7 @@ class UserRepositoryFirebaseImpl implements UserRepository {
   UserRepositoryFirebaseImpl(this.logger);
 
   @override
-  Future login() async {
+  Future<User> login() async {
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
     final GoogleSignInAuthentication googleAuth =
         await googleUser.authentication;
@@ -29,8 +29,8 @@ class UserRepositoryFirebaseImpl implements UserRepository {
     logger.log("signed in " + user.displayName);
 
     _currentUser = User(name: user.displayName);
+    return _currentUser;
   }
-
 
   @override
   Future<User> currentUser() async {
@@ -41,5 +41,10 @@ class UserRepositoryFirebaseImpl implements UserRepository {
     } catch (ex) {
       return null;
     }
+  }
+
+  @override
+  Future logOut() async {
+    await _auth.signOut();
   }
 }

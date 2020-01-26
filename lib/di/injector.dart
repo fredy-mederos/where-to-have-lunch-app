@@ -2,7 +2,10 @@ import 'dart:io';
 
 import 'package:kiwi/kiwi.dart';
 import 'package:where_to_have_lunch/data/firebase/user_repository_firebase_impl.dart';
+import 'package:where_to_have_lunch/data/stub/user_repository_stub_impl.dart';
+import 'package:where_to_have_lunch/di/stub_features.dart';
 import 'package:where_to_have_lunch/domain/repository/user_repository.dart';
+import 'package:where_to_have_lunch/ui/home/home_bloc.dart';
 import 'package:where_to_have_lunch/ui/login/login_bloc.dart';
 import 'package:where_to_have_lunch/ui/splash/splash_bloc.dart';
 import 'package:where_to_have_lunch/ui/splash/splash_page.dart';
@@ -34,27 +37,50 @@ class Injector {
 
   T getDependency<T>() => container.resolve();
 
-  static initDemo() {
+  List<StubFeatures> _stubFeatures = [];
+
+  static initDemo({List<StubFeatures> stubFeatures}) {
     if (instance == null) {
-      instance = Injector._start();
+      instance = Injector._startDemo(stubFeatures: stubFeatures);
     }
   }
 
-  Injector._start() {
+  static initProd() {
+    if (instance == null) {
+      instance = Injector._startProd();
+    }
+  }
+
+  Injector._startDemo({List<StubFeatures> stubFeatures}) {
+    this._stubFeatures = stubFeatures ?? [];
+    _initialize();
+  }
+
+  Injector._startProd() {
+    _initialize();
+  }
+
+  _initialize() {
     _registerCommon();
     _registerRepositories();
     _registerBloCs();
   }
 
   _registerRepositories() {
-    container.registerSingleton<UserRepository, UserRepositoryFirebaseImpl>(
-      (c) => UserRepositoryFirebaseImpl(c.resolve()),
-    );
+    if (_stubFeatures.contains(StubFeatures.USER))
+      container.registerSingleton<UserRepository, UserRepositoryStubImpl>(
+        (c) => UserRepositoryStubImpl(),
+      );
+    else
+      container.registerSingleton<UserRepository, UserRepositoryFirebaseImpl>(
+        (c) => UserRepositoryFirebaseImpl(c.resolve()),
+      );
   }
 
   _registerBloCs() {
     container.registerFactory((c) => LoginBloC(c.resolve(), c.resolve()));
     container.registerFactory((c) => SplashBloC(c.resolve()));
+    container.registerFactory((c) => HomeBloC());
   }
 
   _registerCommon() {

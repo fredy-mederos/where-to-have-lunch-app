@@ -6,7 +6,7 @@ import 'package:where_to_have_lunch/ui/login/login_page.dart';
 import 'package:where_to_have_lunch/ui/splash/splash_page.dart';
 
 void main() {
-  Injector.initProd();
+  Injector.initDemo(stubFeatures: [StubFeatures.USER]);
   runApp(
     WhereToHaveLunchApp(),
   );
