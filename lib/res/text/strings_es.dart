@@ -34,4 +34,6 @@ class StringsEs implements StringsBase {
   String get save => "Guardar";
 
   String get addPlace => "Anadir lugar";
+
+  String get darkTheme => "Tema oscuro";
 }

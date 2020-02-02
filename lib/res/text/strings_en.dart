@@ -33,6 +33,7 @@ class StringsEn implements StringsBase {
 
   String get logout => "Logout";
 
-  @override
   String get addPlace => "Add Place";
+
+  String get darkTheme => "Dark Theme";
 }
