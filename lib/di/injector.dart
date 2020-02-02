@@ -10,6 +10,7 @@ import 'package:where_to_have_lunch/domain/repository/user_repository.dart';
 import 'package:where_to_have_lunch/ui/add_place/add_place_bloc.dart';
 import 'package:where_to_have_lunch/ui/home/home_bloc.dart';
 import 'package:where_to_have_lunch/ui/login/login_bloc.dart';
+import 'package:where_to_have_lunch/ui/places/places_bloc.dart';
 import 'package:where_to_have_lunch/ui/settings/configs_bloc.dart';
 import 'package:where_to_have_lunch/ui/settings/settings_bloc.dart';
 import 'package:where_to_have_lunch/ui/splash/splash_bloc.dart';
@@ -98,6 +99,7 @@ class Injector {
     container.registerFactory((c) => SettingsBloC(c.resolve()));
     container.registerFactory((c) => AddPlaceBloC(c.resolve()));
     container.registerFactory((c) => ConfigsBloC(c.resolve()));
+    container.registerFactory((c) => PlacesBloC(c.resolve()));
   }
 
   _registerCommon() {

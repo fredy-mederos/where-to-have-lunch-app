@@ -5,7 +5,7 @@ class OnInitWidget extends StatefulWidget {
 
   final Function(BuildContext) onInit;
 
-  const OnInitWidget({Key key, @required this.child, this.onInit})
+  const OnInitWidget({Key key, @required this.child, @required this.onInit})
       : super(key: key);
 
   @override

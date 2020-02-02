@@ -28,9 +28,12 @@ class _SettingsPageState extends StateWithBloC<SettingsPage, SettingsBloC> {
 
   @override
   Widget buildWidget(BuildContext context) {
-    return PageBackgroundWidget(
-      iconRes: MdiIcons.settings,
-      child: body(),
+    return Scaffold(
+      appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0),
+      body: PageBackgroundWidget(
+        iconRes: MdiIcons.settings,
+        child: body(),
+      ),
     );
   }
 

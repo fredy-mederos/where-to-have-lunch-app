@@ -36,4 +36,6 @@ class StringsEs implements StringsBase {
   String get addPlace => "Anadir lugar";
 
   String get darkTheme => "Tema oscuro";
+  
+  String get yourPlaces => "Tus lugares";
 }

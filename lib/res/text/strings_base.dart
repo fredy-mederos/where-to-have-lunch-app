@@ -30,4 +30,6 @@ abstract class StringsBase implements WidgetsLocalizations {
   String get logout;
 
   String get darkTheme;
+
+  String get yourPlaces;
 }

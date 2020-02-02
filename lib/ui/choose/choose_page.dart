@@ -11,9 +11,12 @@ class ChoosePage extends StatefulWidget {
 class _ChoosePagState extends State<ChoosePage> {
   @override
   Widget build(BuildContext context) {
-    return PageBackgroundWidget(
-      iconRes: MdiIcons.dice5Outline,
-      child: body(),
+    return Scaffold(
+      appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0),
+      body: PageBackgroundWidget(
+        iconRes: MdiIcons.dice5Outline,
+        child: body(),
+      ),
     );
   }
 

@@ -18,7 +18,6 @@ class _HomePageState extends StateWithBloC<HomePage, HomeBloC> {
   @override
   Widget buildWidget(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0,),
       body: currentPage(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
