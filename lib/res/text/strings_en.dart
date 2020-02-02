@@ -20,4 +20,19 @@ class StringsEn implements StringsBase {
   String get settings => "Settings";
 
   String get choose => "Choose!";
+
+  String get addAPlace => "Add a Place";
+
+  String get requiredField => "This field is required.";
+
+  String get placeName => "Place name";
+
+  String get description => "Description";
+
+  String get save => "Save";
+
+  String get logout => "Logout";
+
+  @override
+  String get addPlace => "Add Place";
 }

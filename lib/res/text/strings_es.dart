@@ -20,4 +20,18 @@ class StringsEs implements StringsBase {
   String get settings => "Configuracion";
 
   String get choose => "Elegir!";
+
+  String get addAPlace => "Anadir un lugar";
+
+  String get description => "Descripcion";
+
+  String get logout => "Cerrar sesion";
+
+  String get placeName => "Nombre del lugar";
+
+  String get requiredField => "Campo requerido";
+
+  String get save => "Guardar";
+
+  String get addPlace => "Anadir lugar";
 }

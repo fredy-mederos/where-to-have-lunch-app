@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:where_to_have_lunch/app_routes.dart';
 import 'package:where_to_have_lunch/domain/models/user.dart';
+import 'package:where_to_have_lunch/res/R.dart';
 import 'package:where_to_have_lunch/ui/base/icon_button_widget.dart';
 import 'package:where_to_have_lunch/ui/base/bloc_state.dart';
 import 'package:where_to_have_lunch/ui/base/page_background_widget.dart';
@@ -35,7 +36,7 @@ class _SettingsPageState extends StateWithBloC<SettingsPage, SettingsBloC> {
             Expanded(child: Container()),
             IconButtonWidget(
               iconData: MdiIcons.logout,
-              label: "Logout",
+              label: R.string.logout,
               onPressed: logOut,
             ),
           ],
@@ -45,7 +46,8 @@ class _SettingsPageState extends StateWithBloC<SettingsPage, SettingsBloC> {
   Widget title() => StreamBuilder<User>(
       stream: bloc.currentUserStream,
       builder: (context, snapshot) {
-        var userName = snapshot.data?.name ?? "";
+        final currentUser = snapshot.data;
+        if (currentUser == null) return Container();
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -57,10 +59,10 @@ class _SettingsPageState extends StateWithBloC<SettingsPage, SettingsBloC> {
                   size: 60,
                   color: Colors.grey,
                 ),
-                snapshot.data?.photoUrl != null
+                currentUser.photoUrl != null
                     ? CircleAvatar(
                         backgroundColor: Colors.transparent,
-                        backgroundImage: NetworkImage(snapshot.data?.photoUrl),
+                        backgroundImage: NetworkImage(currentUser.photoUrl),
                         radius: 40,
                       )
                     : Container(),
@@ -68,7 +70,7 @@ class _SettingsPageState extends StateWithBloC<SettingsPage, SettingsBloC> {
             ),
             Container(height: 16),
             Text(
-              "Hello $userName!",
+              "Hello ${currentUser.name}!",
               style: TextStyle(fontSize: 30),
             ),
           ],
