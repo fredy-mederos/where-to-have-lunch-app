@@ -58,36 +58,41 @@ class _PlacesPageState extends StateWithBloC<PlacesPage, PlacesBloC> {
     );
   }
 
-  Widget body() =>
-      StreamBuilder<List<Place>>(
-          initialData: [],
-          stream: bloc.placesStream,
-          builder: (context, snapshot) {
-            final places = snapshot.data ?? [];
-            return Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Text(
-                    R.string.yourPlaces,
-                    style: TextStyle(fontSize: 40),
-                  ),
-                ),
-                Expanded(child: placesList(places)),
-                if(places.isEmpty && !bloc.isLoading) bottomSection(),
-              ],
-            );
-          });
+  Widget body() => StreamBuilder<List<Place>>(
+      initialData: [],
+      stream: bloc.placesStream,
+      builder: (context, snapshot) {
+        final places = snapshot.data ?? [];
+        return Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                R.string.yourPlaces,
+                style: TextStyle(fontSize: 40),
+              ),
+            ),
+            Expanded(child: placesList(places)),
+            if (places.isEmpty && !bloc.isLoading) bottomSection(),
+          ],
+        );
+      });
 
-  Widget placesList(List<Place> places) =>
-      ListView.builder(
-          itemCount: places.length,
-          itemBuilder: (context, index) {
-            return ItemPlace(place: places[index]);
-          });
+  Widget placesList(List<Place> places) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              crossAxisSpacing: 5,
+              mainAxisSpacing: 5,
+            ),
+            itemCount: places.length,
+            itemBuilder: (context, index) {
+              return ItemPlace(place: places[index]);
+            }),
+      );
 
-  Widget bottomSection() =>
-      Column(
+  Widget bottomSection() => Column(
         children: [
           IconButtonWidget(
             iconData: MdiIcons.plus,

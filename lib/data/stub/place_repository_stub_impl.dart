@@ -1,15 +1,15 @@
 import 'package:where_to_have_lunch/domain/models/place.dart';
+import 'package:where_to_have_lunch/domain/repository/place_color_repostitory.dart';
 import 'package:where_to_have_lunch/domain/repository/place_repository.dart';
 import 'package:where_to_have_lunch/utils/logger.dart';
 
 class PlaceRepositoryStubImpl implements PlaceRepository {
   final Logger logger;
+  final PlaceColorRepository placeColorRepository;
 
-  PlaceRepositoryStubImpl(this.logger);
+  PlaceRepositoryStubImpl(this.logger, this.placeColorRepository);
 
-  var places = [
-    Place(id: "1", name: "My Place", description: "Such a nice place"),
-  ];
+  var places = <Place>[];
 
   @override
   Future<List<Place>> getPlaces() {

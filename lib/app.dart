@@ -41,8 +41,8 @@ class _WhereToHaveLunchAppState
   }
 
   MaterialApp app({
-    Configs settings,
-    CustomLocalizationsDelegate localizationDelegate,
+    @required Configs settings,
+    @required CustomLocalizationsDelegate localizationDelegate,
   }) =>
       MaterialApp(
         title: R.string.appName,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:where_to_have_lunch/res/R.dart';
 import 'package:where_to_have_lunch/ui/add_place/add_place_bloc.dart';
+import 'package:where_to_have_lunch/ui/add_place/color_chooser_widget.dart';
 import 'package:where_to_have_lunch/ui/base/bloc_state.dart';
 import 'package:where_to_have_lunch/ui/base/page_background_widget.dart';
 import 'package:where_to_have_lunch/utils/validators.dart';
@@ -15,10 +16,14 @@ class _AddPlacePageState extends StateWithBloC<AddPlacePage, AddPlaceBloC> {
   final nameFieldController = TextEditingController();
   final descriptionFieldController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  SelectedColorController selectedColorController;
 
   @override
   void initState() {
     super.initState();
+    selectedColorController = SelectedColorController(
+      selectedColor: bloc.getColors()[0],
+    );
     bloc.onSavedStream.listen((saved) {
       if (saved == true) {
         Navigator.pop(context);
@@ -56,7 +61,9 @@ class _AddPlacePageState extends StateWithBloC<AddPlacePage, AddPlaceBloC> {
   Widget body() => Column(
         children: [
           Text(R.string.addPlace, style: TextStyle(fontSize: 40)),
-          Container(height: 30,),
+          Container(
+            height: 30,
+          ),
           Card(
             child: Form(
               key: formKey,
@@ -81,6 +88,11 @@ class _AddPlacePageState extends StateWithBloC<AddPlacePage, AddPlaceBloC> {
                         alignLabelWithHint: true,
                         labelText: R.string.description,
                       ),
+                    ),
+                    Container(height: 10),
+                    ColorChooserWidget(
+                      colors: bloc.getColors(),
+                      selectedColorController: selectedColorController,
                     ),
                     Container(height: 10),
                     Row(
@@ -113,6 +125,7 @@ class _AddPlacePageState extends StateWithBloC<AddPlacePage, AddPlaceBloC> {
                       bloc.addPlace(
                         name: nameFieldController.text,
                         description: descriptionFieldController.text,
+                        placeColor: selectedColorController.selectedColor,
                       );
                     }
                   },

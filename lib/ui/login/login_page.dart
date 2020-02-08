@@ -47,7 +47,7 @@ class _LoginPageState extends StateWithBloC<LoginPage, LoginBloC> {
   }
 
   Widget content() => Padding(
-        padding: const EdgeInsets.only(bottom: 40, right: 16, left: 16),
+        padding: const EdgeInsets.only(bottom: 50, right: 16, left: 16),
         child: Column(
           children: [
             Text(
