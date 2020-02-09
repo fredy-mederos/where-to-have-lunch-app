@@ -21,7 +21,7 @@ class PlaceRepositoryStubImpl implements PlaceRepository {
 
   @override
   Future removePlace(Place place) {
-    return Future.delayed(Duration(seconds: 1), () {
+    return Future.delayed(Duration(seconds: 0), () {
       places.remove(place);
     });
   }

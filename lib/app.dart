@@ -67,6 +67,7 @@ ThemeData get _lightTheme => ThemeData(
       appBarTheme: AppBarTheme(
         iconTheme: IconThemeData(color: Colors.black),
         elevation: 0,
+        brightness: Brightness.light,
       ),
       brightness: Brightness.light,
       primarySwatch: Colors.deepOrange,
@@ -77,6 +78,7 @@ ThemeData get _darkTheme => ThemeData(
       appBarTheme: AppBarTheme(
         iconTheme: IconThemeData(color: Colors.white),
         elevation: 0,
+        brightness: Brightness.dark,
       ),
       brightness: Brightness.dark,
       primarySwatch: Colors.deepOrange,

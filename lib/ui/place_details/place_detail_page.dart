@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:where_to_have_lunch/domain/models/place.dart';
-import 'package:where_to_have_lunch/ui/save_place/save_place_bloc.dart';
+import 'package:where_to_have_lunch/ui/base/bloc_state.dart';
+import 'package:where_to_have_lunch/ui/place_details/place_details_bloc.dart';
 import 'package:where_to_have_lunch/ui/save_place/save_place_page.dart';
 
 class PlaceDetailPage extends StatefulWidget {
@@ -16,9 +17,10 @@ class PlaceDetailPage extends StatefulWidget {
   _PlaceDetailPageState createState() => _PlaceDetailPageState();
 }
 
-class _PlaceDetailPageState extends State<PlaceDetailPage> {
+class _PlaceDetailPageState
+    extends StateWithBloC<PlaceDetailPage, PlaceDetailsBloC> {
   @override
-  Widget build(BuildContext context) {
+  Widget buildWidget(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: widget.place.color.textColor),
@@ -55,19 +57,21 @@ class _PlaceDetailPageState extends State<PlaceDetailPage> {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => AlertDialog(
+      builder: (dialogContext) => AlertDialog(
         title: Text("Do you want to delete this place?"),
         actions: [
           FlatButton(
             child: Text("Ok"),
-            onPressed: () {
+            onPressed: () async {
+              await bloc.deleteItem(place: widget.place);
+              Navigator.of(dialogContext).pop();
               Navigator.of(context).pop();
             },
           ),
           FlatButton(
             child: Text("Cancel"),
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.of(dialogContext).pop();
             },
           ),
         ],
@@ -78,16 +82,22 @@ class _PlaceDetailPageState extends State<PlaceDetailPage> {
   Widget getBody() => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               widget.place.name,
-              style:
-                  TextStyle(fontSize: 40, color: widget.place.color.textColor),
+              style: TextStyle(
+                fontSize: 40,
+                color: widget.place.color.textColor,
+              ),
             ),
             Text(
               widget.place.description,
-              style:
-                  TextStyle(fontSize: 14, color: widget.place.color.textColor),
+              style: TextStyle(
+                fontSize: 14,
+                color: widget.place.color.textColor,
+              ),
             ),
           ],
         ),

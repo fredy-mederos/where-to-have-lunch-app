@@ -10,7 +10,7 @@ class PlaceColorRepositoryImpl implements PlaceColorRepository {
       PlaceColor(
         id: "white",
         name: "White",
-        color: Colors.white,
+        color: Colors.grey.shade300,
         textColor: Colors.black,
       ),
       PlaceColor(
