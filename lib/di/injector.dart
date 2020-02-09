@@ -9,10 +9,10 @@ import 'package:where_to_have_lunch/domain/repository/configs_repository.dart';
 import 'package:where_to_have_lunch/domain/repository/place_color_repostitory.dart';
 import 'package:where_to_have_lunch/domain/repository/place_repository.dart';
 import 'package:where_to_have_lunch/domain/repository/user_repository.dart';
-import 'package:where_to_have_lunch/ui/add_place/add_place_bloc.dart';
 import 'package:where_to_have_lunch/ui/home/home_bloc.dart';
 import 'package:where_to_have_lunch/ui/login/login_bloc.dart';
 import 'package:where_to_have_lunch/ui/places/places_bloc.dart';
+import 'package:where_to_have_lunch/ui/save_place/save_place_bloc.dart';
 import 'package:where_to_have_lunch/ui/settings/configs_bloc.dart';
 import 'package:where_to_have_lunch/ui/settings/settings_bloc.dart';
 import 'package:where_to_have_lunch/ui/splash/splash_bloc.dart';
@@ -99,7 +99,7 @@ class Injector {
     container.registerFactory((c) => SplashBloC(c.resolve()));
     container.registerFactory((c) => HomeBloC());
     container.registerFactory((c) => SettingsBloC(c.resolve()));
-    container.registerFactory((c) => AddPlaceBloC(c.resolve(), c.resolve()));
+    container.registerFactory((c) => SavePlaceBloC(c.resolve(), c.resolve()));
     container.registerFactory((c) => ConfigsBloC(c.resolve()));
     container.registerFactory((c) => PlacesBloC(c.resolve()));
   }

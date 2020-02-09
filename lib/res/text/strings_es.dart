@@ -38,4 +38,6 @@ class StringsEs implements StringsBase {
   String get darkTheme => "Tema oscuro";
   
   String get yourPlaces => "Tus lugares";
+
+  String get editPlace => "Editar Lugar";
 }

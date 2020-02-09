@@ -32,4 +32,6 @@ abstract class StringsBase implements WidgetsLocalizations {
   String get darkTheme;
 
   String get yourPlaces;
+
+  String get editPlace;
 }

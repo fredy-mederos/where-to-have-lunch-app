@@ -8,6 +8,7 @@ import 'package:where_to_have_lunch/ui/base/icon_button_widget.dart';
 import 'package:where_to_have_lunch/ui/base/on_init_widget.dart';
 import 'package:where_to_have_lunch/ui/base/page_background_widget.dart';
 import 'package:where_to_have_lunch/ui/base/page_with_loading.dart';
+import 'package:where_to_have_lunch/ui/place_details/place_detail_page.dart';
 import 'package:where_to_have_lunch/ui/places/item_place.dart';
 import 'package:where_to_have_lunch/ui/places/places_bloc.dart';
 
@@ -88,7 +89,11 @@ class _PlacesPageState extends StateWithBloC<PlacesPage, PlacesBloC> {
             ),
             itemCount: places.length,
             itemBuilder: (context, index) {
-              return ItemPlace(place: places[index]);
+              final item = places[index];
+              return ItemPlace(
+                place: item,
+                onTap: () => navigateToPlace(item),
+              );
             }),
       );
 
@@ -102,6 +107,17 @@ class _PlacesPageState extends StateWithBloC<PlacesPage, PlacesBloC> {
           Container(height: 40),
         ],
       );
+
+  void navigateToPlace(Place place) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PlaceDetailPage(
+          place: place,
+        ),
+      ),
+    );
+  }
 
   void addPlace() async {
     await Navigator.pushNamed(context, AppRoutes.ADD_PLACE);

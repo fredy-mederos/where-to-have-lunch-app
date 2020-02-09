@@ -8,11 +8,11 @@ import 'package:where_to_have_lunch/domain/repository/place_repository.dart';
 import 'package:where_to_have_lunch/ui/base/bloc_base.dart';
 import 'package:where_to_have_lunch/ui/base/bloc_loading.dart';
 
-class AddPlaceBloC with LoadingBloC implements BaseBloC {
+class SavePlaceBloC with LoadingBloC implements BaseBloC {
   final PlaceRepository _placeRepository;
   final PlaceColorRepository _placeColorRepository;
 
-  AddPlaceBloC(this._placeRepository, this._placeColorRepository);
+  SavePlaceBloC(this._placeRepository, this._placeColorRepository);
 
   Subject<bool> _onSavedController = BehaviorSubject();
 
@@ -21,6 +21,7 @@ class AddPlaceBloC with LoadingBloC implements BaseBloC {
   List<PlaceColor> getColors() => _placeColorRepository.getPlaceColors();
 
   addPlace({
+    @required String id,
     @required String name,
     @required String description,
     @required PlaceColor placeColor,
@@ -28,7 +29,7 @@ class AddPlaceBloC with LoadingBloC implements BaseBloC {
     isLoading = true;
     await _placeRepository.savePlace(
       Place(
-        id: Uuid().v4(),
+        id: id ?? Uuid().v4(),
         name: name,
         description: description,
         color: placeColor,

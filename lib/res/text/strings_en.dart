@@ -38,4 +38,6 @@ class StringsEn implements StringsBase {
   String get darkTheme => "Dark Theme";
 
   String get yourPlaces => "Your Places";
+
+  String get editPlace => "Edit Place";
 }
