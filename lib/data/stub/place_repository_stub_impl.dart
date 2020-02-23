@@ -1,3 +1,4 @@
+import 'package:uuid/uuid.dart';
 import 'package:where_to_have_lunch/domain/models/place.dart';
 import 'package:where_to_have_lunch/domain/repository/place_color_repostitory.dart';
 import 'package:where_to_have_lunch/domain/repository/place_repository.dart';
@@ -15,7 +16,7 @@ class PlaceRepositoryStubImpl implements PlaceRepository {
   Future<List<Place>> getPlaces() {
     return Future.delayed(
       Duration(seconds: 2),
-      () => places,
+      () => new List.from(places),
     );
   }
 
@@ -28,20 +29,17 @@ class PlaceRepositoryStubImpl implements PlaceRepository {
 
   @override
   Future addPlace(Place place) async {
+    place.id = Uuid().v4();
     places.add(place);
   }
 
   @override
   Future savePlace(Place place) {
     return Future.delayed(Duration(seconds: 2), () {
-      final oldPlace =
-          places.firstWhere((item) => item.id == place.id, orElse: () => null);
-
-      if (oldPlace == null) {
-      } else {
-        oldPlace.name = place.name;
-        oldPlace.description = place.description;
-        oldPlace.color = place.color;
+      final index = places.indexWhere((item) => item.id == place.id);
+      if (index != -1) {
+        places.removeAt(index);
+        places.insert(index, place);
       }
     });
   }

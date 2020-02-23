@@ -13,9 +13,9 @@ class SavePlaceBloC with LoadingBloC implements BaseBloC {
 
   SavePlaceBloC(this._placeRepository, this._placeColorRepository);
 
-  Subject<bool> _onSavedController = BehaviorSubject();
+  Subject<Place> _onSavedController = BehaviorSubject();
 
-  Stream<bool> get onSavedStream => _onSavedController.stream;
+  Stream<Place> get onSavedStream => _onSavedController.stream;
 
   List<PlaceColor> getColors() => _placeColorRepository.getPlaceColors();
 
@@ -38,7 +38,7 @@ class SavePlaceBloC with LoadingBloC implements BaseBloC {
     } else {
       await _placeRepository.savePlace(place);
     }
-    _onSavedController.sinkAddSafe(true);
+    _onSavedController.sinkAddSafe(place);
     //isLoading = false;
   }
 

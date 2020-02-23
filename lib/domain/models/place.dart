@@ -13,4 +13,10 @@ class Place {
     @required this.description,
     @required this.color,
   });
+
+  updateFromPlace({@required Place place}) {
+    this.name = place.name;
+    this.description = place.description;
+    this.color = place.color;
+  }
 }

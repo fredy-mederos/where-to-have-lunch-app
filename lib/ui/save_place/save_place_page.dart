@@ -36,9 +36,9 @@ class _SavePlacePageState extends StateWithBloC<SavePlacePage, SavePlaceBloC> {
   void initState() {
     super.initState();
     initControllers();
-    bloc.onSavedStream.listen((saved) {
-      if (saved == true) {
-        Navigator.pop(context);
+    bloc.onSavedStream.listen((place) {
+      if (place != null) {
+        Navigator.pop(context, place);
       }
     });
   }

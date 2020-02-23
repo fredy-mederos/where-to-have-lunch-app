@@ -42,8 +42,8 @@ class _PlaceDetailPageState
     );
   }
 
-  void navigateToSavePlacePage() {
-    Navigator.push(
+  void navigateToSavePlacePage() async {
+    final place = await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => SavePlacePage(
@@ -51,6 +51,11 @@ class _PlaceDetailPageState
         ),
       ),
     );
+    if (place != null) {
+      setState(() {
+        widget.place.updateFromPlace(place: place);
+      });
+    }
   }
 
   void deletePlace() {
