@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:uuid/uuid.dart';
 import 'package:where_to_have_lunch/domain/models/place.dart';
 import 'package:where_to_have_lunch/domain/models/place_color.dart';
 import 'package:where_to_have_lunch/domain/repository/place_color_repostitory.dart';
@@ -27,14 +26,18 @@ class SavePlaceBloC with LoadingBloC implements BaseBloC {
     @required PlaceColor placeColor,
   }) async {
     isLoading = true;
-    await _placeRepository.savePlace(
-      Place(
-        id: id ?? Uuid().v4(),
-        name: name,
-        description: description,
-        color: placeColor,
-      ),
+
+    final place = Place(
+      id: id,
+      name: name,
+      description: description,
+      color: placeColor,
     );
+    if (id == null) {
+      await _placeRepository.addPlace(place);
+    } else {
+      await _placeRepository.savePlace(place);
+    }
     _onSavedController.sinkAddSafe(true);
     //isLoading = false;
   }

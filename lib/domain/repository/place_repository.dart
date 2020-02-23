@@ -5,5 +5,7 @@ abstract class PlaceRepository {
 
   Future savePlace(Place place);
 
+  Future addPlace(Place place);
+
   Future removePlace(Place place);
 }

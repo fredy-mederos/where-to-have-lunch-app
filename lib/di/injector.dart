@@ -1,4 +1,6 @@
 import 'package:kiwi/kiwi.dart';
+import 'package:where_to_have_lunch/data/firebase/place_mapper.dart';
+import 'package:where_to_have_lunch/data/firebase/place_repository_firebase_impl.dart';
 import 'package:where_to_have_lunch/data/firebase/user_mapper.dart';
 import 'package:where_to_have_lunch/data/firebase/user_repository_firebase_impl.dart';
 import 'package:where_to_have_lunch/data/place_color_repository_impl.dart';
@@ -80,19 +82,20 @@ class Injector {
     container.registerSingleton<PlaceRepository, PlaceRepositoryStubImpl>(
       (c) => PlaceRepositoryStubImpl(c.resolve(), c.resolve()),
     );
-    container.registerSingleton<ConfigsRepository, ConfigsRepositoryStubImpl>(
-      (c) => ConfigsRepositoryStubImpl(),
-    );
   }
 
   _registerProd() {
     container.registerSingleton<UserRepository, UserRepositoryFirebaseImpl>(
       (c) => UserRepositoryFirebaseImpl(c.resolve(), c.resolve()),
     );
+    container.registerSingleton<PlaceRepository, PlaceRepositoryFirebaseImpl>(
+      (c) => PlaceRepositoryFirebaseImpl(c.resolve()),
+    );
   }
 
   _registerMappers() {
     container.registerFactory((c) => UserMapper());
+    container.registerFactory((c) => PlaceMapper(c.resolve()));
   }
 
   _registerBloCs() {
@@ -107,14 +110,19 @@ class Injector {
   }
 
   _registerCommon() {
-    if (isInDebugMode())
+    if (isInDebugMode()) {
       container.registerSingleton<Logger, LoggerImpl>((c) => LoggerImpl());
-    else
-      container
-          .registerSingleton<Logger, LoggerEmptyImpl>((c) => LoggerEmptyImpl());
+    } else {
+      container.registerSingleton<Logger, LoggerEmptyImpl>(
+        (c) => LoggerEmptyImpl(),
+      );
+    }
 
     container.registerSingleton<PlaceColorRepository, PlaceColorRepositoryImpl>(
       (c) => PlaceColorRepositoryImpl(),
+    );
+    container.registerSingleton<ConfigsRepository, ConfigsRepositoryStubImpl>(
+      (c) => ConfigsRepositoryStubImpl(),
     );
   }
 }

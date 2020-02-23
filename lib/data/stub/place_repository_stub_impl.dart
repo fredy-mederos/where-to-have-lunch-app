@@ -27,14 +27,17 @@ class PlaceRepositoryStubImpl implements PlaceRepository {
   }
 
   @override
+  Future addPlace(Place place) async {
+    places.add(place);
+  }
+
+  @override
   Future savePlace(Place place) {
     return Future.delayed(Duration(seconds: 2), () {
       final oldPlace =
           places.firstWhere((item) => item.id == place.id, orElse: () => null);
 
       if (oldPlace == null) {
-        places.add(place);
-        logger.log("Place added '${place.name}'");
       } else {
         oldPlace.name = place.name;
         oldPlace.description = place.description;

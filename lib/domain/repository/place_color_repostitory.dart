@@ -4,5 +4,5 @@ import 'package:where_to_have_lunch/domain/models/place_color.dart';
 abstract class PlaceColorRepository {
   List<PlaceColor> getPlaceColors();
 
-  PlaceColor getPlaceColorByName({@required String name});
+  PlaceColor getPlaceColorById({@required String id});
 }
