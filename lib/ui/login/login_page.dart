@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:where_to_have_lunch/app_routes.dart';
+import 'package:where_to_have_lunch/di/bloc_provider.dart';
 import 'package:where_to_have_lunch/res/R.dart';
 import 'package:where_to_have_lunch/ui/base/icon_button_widget.dart';
 import 'package:where_to_have_lunch/ui/base/bloc_state.dart';
 import 'package:where_to_have_lunch/ui/base/on_init_widget.dart';
 import 'package:where_to_have_lunch/ui/base/page_background_widget.dart';
 import 'package:where_to_have_lunch/ui/login/login_bloc.dart';
+import 'package:where_to_have_lunch/ui/settings/configs_bloc.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -14,10 +16,14 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends StateWithBloC<LoginPage, LoginBloC> {
+  ConfigsBloC blocConfigs;
+
   @override
   void initState() {
     super.initState();
-    bloc.onUserLogin.listen((user) {
+    blocConfigs = BlocProvider.of(context);
+    bloc.onUserLogin.listen((user) async {
+      await blocConfigs.loadConfigs();
       Navigator.pushReplacementNamed(context, AppRoutes.HOME);
     });
   }

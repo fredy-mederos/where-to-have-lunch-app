@@ -120,6 +120,7 @@ class _SettingsPageState extends StateWithBloC<SettingsPage, SettingsBloC> {
 
   void logOut() {
     bloc.logout();
+    blocConfigs.loadConfigs();
     Navigator.pushNamedAndRemoveUntil(context, AppRoutes.LOGIN, (_) => false);
   }
 }

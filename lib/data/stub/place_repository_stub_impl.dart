@@ -45,4 +45,9 @@ class PlaceRepositoryStubImpl implements PlaceRepository {
       }
     });
   }
+
+  @override
+  Future logOut() {
+    places = <Place>[];
+  }
 }

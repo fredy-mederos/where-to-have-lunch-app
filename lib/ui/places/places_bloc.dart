@@ -20,6 +20,7 @@ class PlacesBloC with LoadingBloC, ErrorHandlerBloC implements BaseBloC {
       final places = await _placeRepository.getPlaces();
       _placeController.sinkAddSafe(places);
     } catch (ex) {
+      print(ex);
       onError("Error Loading The Places!");
     }
     isLoading = false;

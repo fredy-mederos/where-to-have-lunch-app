@@ -8,4 +8,6 @@ abstract class PlaceRepository {
   Future addPlace(Place place);
 
   Future removePlace(Place place);
+
+  Future logOut();
 }

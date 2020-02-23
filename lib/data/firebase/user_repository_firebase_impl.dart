@@ -7,8 +7,7 @@ import 'package:where_to_have_lunch/utils/logger.dart';
 
 class UserRepositoryFirebaseImpl implements UserRepository {
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
+  final FirebaseAuth auth = FirebaseAuth.instance;
   final Logger logger;
   final UserMapper mapper;
 
@@ -27,8 +26,7 @@ class UserRepositoryFirebaseImpl implements UserRepository {
       idToken: googleAuth.idToken,
     );
 
-    final FirebaseUser user =
-        (await _auth.signInWithCredential(credential)).user;
+    final FirebaseUser user = (await auth.signInWithCredential(credential)).user;
 
     return mapper.fromFirebase(user);
   }
@@ -36,7 +34,7 @@ class UserRepositoryFirebaseImpl implements UserRepository {
   @override
   Future<User> currentUser() async {
     try {
-      var currentUser = await _auth.currentUser();
+      var currentUser = await auth.currentUser();
       return mapper.fromFirebase(currentUser);
     } catch (ex) {
       return null;
@@ -45,6 +43,6 @@ class UserRepositoryFirebaseImpl implements UserRepository {
 
   @override
   Future logOut() async {
-    await _auth.signOut();
+    await auth.signOut();
   }
 }
