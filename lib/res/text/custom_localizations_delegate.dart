@@ -5,7 +5,6 @@ import 'package:where_to_have_lunch/res/text/strings_en.dart';
 import 'package:where_to_have_lunch/res/text/strings_es.dart';
 
 class CustomLocalizationsDelegate extends LocalizationsDelegate<StringsBase> {
-
   static StringsBase stringsBase = StringsEn();
 
   List<Locale> get supportedLocales {

@@ -3,7 +3,6 @@ import 'package:where_to_have_lunch/domain/models/place_color.dart';
 import 'package:where_to_have_lunch/domain/repository/place_color_repostitory.dart';
 
 class PlaceColorRepositoryImpl implements PlaceColorRepository {
-
   @override
   List<PlaceColor> getPlaceColors() {
     return [

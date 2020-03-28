@@ -1,7 +1,6 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:where_to_have_lunch/utils/extensions.dart';
 
-
 class LoadingBloC {
   BehaviorSubject<bool> _loadingController = BehaviorSubject();
 

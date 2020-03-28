@@ -4,8 +4,8 @@ import 'package:where_to_have_lunch/domain/models/place.dart';
 import 'package:where_to_have_lunch/res/R.dart';
 import 'package:where_to_have_lunch/ui/base/bloc_state.dart';
 import 'package:where_to_have_lunch/ui/base/page_background_widget.dart';
-import 'package:where_to_have_lunch/ui/save_place/save_place_bloc.dart';
 import 'package:where_to_have_lunch/ui/save_place/color_chooser_widget.dart';
+import 'package:where_to_have_lunch/ui/save_place/save_place_bloc.dart';
 import 'package:where_to_have_lunch/utils/validators.dart';
 
 class SavePlacePage extends StatefulWidget {

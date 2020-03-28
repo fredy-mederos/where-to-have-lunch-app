@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:where_to_have_lunch/data/firebase/firestore_api.dart';
 import 'package:where_to_have_lunch/data/firebase/place_mapper.dart';

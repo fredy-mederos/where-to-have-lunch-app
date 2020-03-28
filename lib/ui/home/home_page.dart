@@ -42,9 +42,12 @@ class _HomePageState extends StateWithBloC<HomePage, HomeBloC> {
 
   Widget currentPage() {
     switch (currentIndex) {
-      case 0:return ChoosePage();
-      case 1:return PlacesPage();
-      case 2:return SettingsPage();
+      case 0:
+        return ChoosePage();
+      case 1:
+        return PlacesPage();
+      case 2:
+        return SettingsPage();
     }
     return Center(
       child: Text("No Page"),

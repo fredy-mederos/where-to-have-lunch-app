@@ -6,7 +6,6 @@ import 'package:where_to_have_lunch/domain/repository/user_repository.dart';
 import 'package:where_to_have_lunch/utils/logger.dart';
 
 class UserRepositoryFirebaseImpl implements UserRepository {
-
   final FirebaseAuth auth = FirebaseAuth.instance;
   final Logger logger;
   final UserMapper mapper;
@@ -26,7 +25,8 @@ class UserRepositoryFirebaseImpl implements UserRepository {
       idToken: googleAuth.idToken,
     );
 
-    final FirebaseUser user = (await auth.signInWithCredential(credential)).user;
+    final FirebaseUser user =
+        (await auth.signInWithCredential(credential)).user;
 
     return mapper.fromFirebase(user);
   }

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:where_to_have_lunch/res/text/custom_localizations_delegate.dart';
 import 'package:where_to_have_lunch/app_routes.dart';
+import 'package:where_to_have_lunch/res/text/custom_localizations_delegate.dart';
 import 'package:where_to_have_lunch/ui/base/bloc_state.dart';
 import 'package:where_to_have_lunch/ui/settings/configs_bloc.dart';
 
+import 'di/injector.dart';
 import 'domain/models/configs.dart';
 import 'res/R.dart';
-import 'di/injector.dart';
 
 class WhereToHaveLunchApp extends StatefulWidget {
   @override

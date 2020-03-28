@@ -121,14 +121,14 @@ class Injector {
 
   _registerCommon() {
     if (isInDebugMode()) {
-      container.registerSingleton<Logger, LoggerImpl>((c) => LoggerImpl());
+      container.registerFactory<Logger, LoggerImpl>((c) => LoggerImpl());
     } else {
-      container.registerSingleton<Logger, LoggerEmptyImpl>(
+      container.registerFactory<Logger, LoggerEmptyImpl>(
         (c) => LoggerEmptyImpl(),
       );
     }
 
-    container.registerSingleton<PlaceColorRepository, PlaceColorRepositoryImpl>(
+    container.registerFactory<PlaceColorRepository, PlaceColorRepositoryImpl>(
       (c) => PlaceColorRepositoryImpl(),
     );
   }
