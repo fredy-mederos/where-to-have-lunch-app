@@ -2,7 +2,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:where_to_have_lunch/domain/models/user.dart';
 import 'package:where_to_have_lunch/domain/repository/place_repository.dart';
 import 'package:where_to_have_lunch/domain/repository/user_repository.dart';
-import 'package:where_to_have_lunch/ui/base/bloc_base.dart';
+import 'package:where_to_have_lunch/ui/base/bloc/bloc_base.dart';
 
 class SettingsBloC implements BaseBloC {
   final UserRepository _userRepository;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:where_to_have_lunch/app_routes.dart';
-import 'package:where_to_have_lunch/ui/base/bloc_state.dart';
+import 'package:where_to_have_lunch/ui/base/bloc/bloc_state.dart';
 import 'package:where_to_have_lunch/ui/splash/splash_bloc.dart';
 
 class SplashPage extends StatefulWidget {

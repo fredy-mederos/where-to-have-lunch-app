@@ -23,7 +23,7 @@ import 'package:where_to_have_lunch/ui/settings/settings_bloc.dart';
 import 'package:where_to_have_lunch/ui/splash/splash_bloc.dart';
 import 'package:where_to_have_lunch/utils/logger.dart';
 
-import '../ui/base/bloc_base.dart';
+import '../ui/base/bloc/bloc_base.dart';
 
 ///Part dependency injector engine and Part service locator.
 ///The main purpose of [Injector] is to provide bloCs instances and initialize the app components depending the current scope.

@@ -1,5 +1,5 @@
 import 'package:where_to_have_lunch/domain/repository/user_repository.dart';
-import 'package:where_to_have_lunch/ui/base/bloc_base.dart';
+import 'package:where_to_have_lunch/ui/base/bloc/bloc_base.dart';
 
 class SplashBloC extends BaseBloC {
   final UserRepository userRepository;

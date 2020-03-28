@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:where_to_have_lunch/res/R.dart';
-import 'package:where_to_have_lunch/ui/base/bloc_state.dart';
+import 'package:where_to_have_lunch/ui/base/bloc/bloc_state.dart';
 import 'package:where_to_have_lunch/ui/choose/choose_page.dart';
 import 'package:where_to_have_lunch/ui/home/home_bloc.dart';
 import 'package:where_to_have_lunch/ui/places/places_page.dart';

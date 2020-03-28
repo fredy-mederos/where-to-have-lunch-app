@@ -1,9 +1,9 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:where_to_have_lunch/domain/models/user.dart';
 import 'package:where_to_have_lunch/domain/repository/user_repository.dart';
-import 'package:where_to_have_lunch/ui/base/bloc_base.dart';
-import 'package:where_to_have_lunch/ui/base/bloc_error_handler.dart';
-import 'package:where_to_have_lunch/ui/base/bloc_loading.dart';
+import 'package:where_to_have_lunch/ui/base/bloc/bloc_base.dart';
+import 'package:where_to_have_lunch/ui/base/bloc/bloc_error_handler.dart';
+import 'package:where_to_have_lunch/ui/base/bloc/bloc_loading.dart';
 import 'package:where_to_have_lunch/utils/logger.dart';
 
 class LoginBloC with LoadingBloC, ErrorHandlerBloC implements BaseBloC {
