@@ -40,4 +40,10 @@ class StringsEs implements StringsBase {
   String get yourPlaces => "Tus lugares";
 
   String get editPlace => "Editar Lugar";
+
+  String helloUser(String userName) {
+    return "Hola $userName!";
+  }
+
+  String get youAreOffline => "Estas sin conexion";
 }

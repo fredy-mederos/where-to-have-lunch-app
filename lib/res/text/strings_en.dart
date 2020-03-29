@@ -40,4 +40,10 @@ class StringsEn implements StringsBase {
   String get yourPlaces => "Your Places";
 
   String get editPlace => "Edit Place";
+
+  String helloUser(String userName) {
+    return "Hello $userName!";
+  }
+
+  String get youAreOffline => "You are offline";
 }

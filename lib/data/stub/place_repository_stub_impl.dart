@@ -4,6 +4,7 @@ import 'package:where_to_have_lunch/domain/repository/place_color_repostitory.da
 import 'package:where_to_have_lunch/domain/repository/place_repository.dart';
 import 'package:where_to_have_lunch/utils/logger.dart';
 
+@Deprecated("Do not use this in production")
 class PlaceRepositoryStubImpl implements PlaceRepository {
   final Logger logger;
   final PlaceColorRepository placeColorRepository;

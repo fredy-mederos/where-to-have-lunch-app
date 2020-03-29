@@ -34,4 +34,8 @@ abstract class StringsBase implements WidgetsLocalizations {
   String get yourPlaces;
 
   String get editPlace;
+
+  String get youAreOffline;
+
+  String helloUser(String userName);
 }

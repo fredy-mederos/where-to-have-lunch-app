@@ -31,7 +31,7 @@ class _SettingsPageState extends StateWithBloC<SettingsPage, SettingsBloC> {
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0),
       body: PageBackgroundWidget(
-        iconRes: MdiIcons.settings,
+        iconRes: MdiIcons.cog,
         child: body(),
       ),
     );
@@ -81,7 +81,7 @@ class _SettingsPageState extends StateWithBloC<SettingsPage, SettingsBloC> {
             ),
             Container(height: 16),
             Text(
-              "Hello ${currentUser.name}!",
+              R.string.helloUser(currentUser.name),
               style: TextStyle(fontSize: 30),
             ),
           ],
@@ -100,9 +100,7 @@ class _SettingsPageState extends StateWithBloC<SettingsPage, SettingsBloC> {
                 Row(
                   children: [
                     Text(R.string.darkTheme),
-                    Expanded(
-                      child: Container(),
-                    ),
+                    Expanded(child: Container()),
                     if (config != null)
                       Switch.adaptive(
                         value: config.darkMode,

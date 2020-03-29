@@ -1,6 +1,7 @@
 import 'package:where_to_have_lunch/domain/models/configs.dart';
 import 'package:where_to_have_lunch/domain/repository/configs_repository.dart';
 
+@Deprecated("Do not use this in production")
 class ConfigsRepositoryStubImpl implements ConfigsRepository {
   var configs = Configs(darkMode: false);
 

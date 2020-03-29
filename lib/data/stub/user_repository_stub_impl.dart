@@ -1,6 +1,7 @@
 import 'package:where_to_have_lunch/domain/models/user.dart';
 import 'package:where_to_have_lunch/domain/repository/user_repository.dart';
 
+@Deprecated("Do not use this in production")
 class UserRepositoryStubImpl implements UserRepository {
   User _currentUser;
 

@@ -56,7 +56,9 @@ class _WhereToHaveLunchAppState
         ],
         supportedLocales: localizationDelegate.supportedLocales,
         localeResolutionCallback: localizationDelegate.resolution(
-          fallback: Locale("en"), //todo the selected language could be included also in the configs settings
+          fallback: Locale(
+            "en",
+          ), //todo the selected language could be included also in the configs settings
         ),
         initialRoute: AppRoutes.SPLASH,
         routes: AppRoutes.routes(),

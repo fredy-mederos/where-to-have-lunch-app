@@ -4,6 +4,7 @@ import 'package:where_to_have_lunch/res/R.dart';
 import 'package:where_to_have_lunch/ui/base/bloc/bloc_state.dart';
 import 'package:where_to_have_lunch/ui/choose/choose_page.dart';
 import 'package:where_to_have_lunch/ui/home/home_bloc.dart';
+import 'package:where_to_have_lunch/ui/network_error/network_error_widget.dart';
 import 'package:where_to_have_lunch/ui/places/places_page.dart';
 import 'package:where_to_have_lunch/ui/settings/settings_page.dart';
 
@@ -18,7 +19,12 @@ class _HomePageState extends StateWithBloC<HomePage, HomeBloC> {
   @override
   Widget buildWidget(BuildContext context) {
     return Scaffold(
-      body: currentPage(),
+      body: Column(
+        children: [
+          Expanded(child: currentPage()),
+          NetworkErrorWidget(),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: onPageSelected,
