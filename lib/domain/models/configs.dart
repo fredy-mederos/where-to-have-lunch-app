@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 class Configs {
-  bool darkMode;
+  final bool darkMode;
 
   Configs({@required this.darkMode});
 }

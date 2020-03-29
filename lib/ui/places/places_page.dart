@@ -47,13 +47,10 @@ class _PlacesPageState extends StateWithBloC<PlacesPage, PlacesBloC> {
       ),
       body: OnInitWidget(
         onInit: registerErrorStream,
-        child: PageWithLoading(
-          loadingStream: bloc.isLoadingStream,
-          child: PageBackgroundWidget(
-            iconRes: MdiIcons.silverwareVariant,
-            rotateAngle: 0,
-            child: body(),
-          ),
+        child: PageBackgroundWidget(
+          iconRes: MdiIcons.silverwareVariant,
+          rotateAngle: 0,
+          child: body(),
         ),
       ),
     );
@@ -74,7 +71,7 @@ class _PlacesPageState extends StateWithBloC<PlacesPage, PlacesBloC> {
               ),
             ),
             Expanded(child: placesList(places)),
-            if (places.isEmpty && !bloc.isLoading) bottomSection(),
+            if (places.isEmpty) bottomSection(),
           ],
         );
       });
@@ -119,8 +116,7 @@ class _PlacesPageState extends StateWithBloC<PlacesPage, PlacesBloC> {
     );
   }
 
-  void addPlace() async {
-    await Navigator.pushNamed(context, AppRoutes.ADD_PLACE);
-    bloc.loadPlaces();
+  void addPlace() {
+    Navigator.pushNamed(context, AppRoutes.ADD_PLACE);
   }
 }

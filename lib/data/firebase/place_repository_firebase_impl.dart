@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:rxdart/subjects.dart';
 import 'package:where_to_have_lunch/data/firebase/firestore_api.dart';
 import 'package:where_to_have_lunch/data/firebase/place_mapper.dart';
 import 'package:where_to_have_lunch/domain/models/place.dart';
@@ -12,7 +13,24 @@ class PlaceRepositoryFirebaseImpl implements PlaceRepository {
   FirestoreApi _firestoreApi;
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-  PlaceRepositoryFirebaseImpl(this.placeMapper);
+  // ignore: close_sinks
+  final BehaviorSubject<List<Place>> placesController = BehaviorSubject.seeded(
+    <Place>[],
+  );
+
+  PlaceRepositoryFirebaseImpl(this.placeMapper) {
+    loadData();
+  }
+
+  void loadData() async {
+    final api = await getApi();
+    api.streamDataCollection().listen((data) {
+      final places = data.documents
+          .map((item) => placeMapper.placeFromMap(item.data, item.documentID))
+          .toList();
+      placesController.sink.add(places);
+    });
+  }
 
   Future<FirestoreApi> getApi() async {
     if (_firestoreApi != null) return _firestoreApi;
@@ -34,6 +52,9 @@ class PlaceRepositoryFirebaseImpl implements PlaceRepository {
         )
         .toList();
   }
+
+  @override
+  Stream<List<Place>> getPlacesStream() => placesController.stream;
 
   @override
   Future removePlace(Place place) async {

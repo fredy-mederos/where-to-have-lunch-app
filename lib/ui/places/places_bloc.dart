@@ -1,12 +1,15 @@
+import 'dart:async';
+
 import 'package:rxdart/rxdart.dart';
 import 'package:where_to_have_lunch/domain/models/place.dart';
 import 'package:where_to_have_lunch/domain/repository/place_repository.dart';
 import 'package:where_to_have_lunch/ui/base/bloc/bloc_base.dart';
 import 'package:where_to_have_lunch/ui/base/bloc/bloc_error_handler.dart';
-import 'package:where_to_have_lunch/ui/base/bloc/bloc_loading.dart';
 
-class PlacesBloC with LoadingBloC, ErrorHandlerBloC implements BaseBloC {
+class PlacesBloC with ErrorHandlerBloC implements BaseBloC {
   final PlaceRepository _placeRepository;
+
+  StreamSubscription<List<Place>> subscription;
 
   PlacesBloC(this._placeRepository);
 
@@ -14,22 +17,22 @@ class PlacesBloC with LoadingBloC, ErrorHandlerBloC implements BaseBloC {
 
   Stream<List<Place>> get placesStream => _placeController.stream;
 
-  loadPlaces() async {
-    isLoading = true;
+  loadPlaces() {
     try {
-      final places = await _placeRepository.getPlaces();
-      _placeController.sinkAddSafe(places);
-    } catch (ex) {
+      subscription = _placeRepository.getPlacesStream().listen((data) {
+        _placeController.sinkAddSafe(data);
+      }, onError: () {
+        onError("Error Loading The Places!");
+      });
+    }catch(ex){
       print(ex);
-      onError("Error Loading The Places!");
     }
-    isLoading = false;
   }
 
   @override
   void dispose() {
-    disposeLoadingBloC();
     disposeErrorHandlerBloC();
     _placeController.close();
+    subscription?.cancel();
   }
 }

@@ -20,6 +20,10 @@ class FirestoreApi {
     return ref.document(id).get();
   }
 
+  Stream<DocumentSnapshot> streamDocumentById(String id) {
+    return ref.document(id).snapshots();
+  }
+
   Future<void> removeDocument(String id) {
     return ref.document(id).delete();
   }
