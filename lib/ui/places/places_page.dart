@@ -38,7 +38,11 @@ class _PlacesPageState extends StateWithBloC<PlacesPage, PlacesBloC> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         actions: [
-          FlatButton.icon(onPressed: addPlace, icon: Icon(MdiIcons.plus), label: Text(R.string.addAPlace)),
+          FlatButton.icon(
+            onPressed: addPlace,
+            icon: Icon(MdiIcons.plus),
+            label: Text(R.string.addAPlace),
+          ),
         ],
       ),
       body: OnInitWidget(

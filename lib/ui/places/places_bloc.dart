@@ -18,15 +18,11 @@ class PlacesBloC with ErrorHandlerBloC implements BaseBloC {
   Stream<List<Place>> get placesStream => _placeController.stream;
 
   loadPlaces() {
-    try {
-      subscription = _placeRepository.getPlacesStream().listen((data) {
-        _placeController.sinkAddSafe(data);
-      }, onError: () {
-        onError("Error Loading The Places!");
-      });
-    } catch (ex) {
-      print(ex);
-    }
+    subscription = _placeRepository.getPlacesStream().listen((data) {
+      _placeController.sinkAddSafe(data);
+    }, onError: () {
+      onError("Error Loading The Places!");
+    });
   }
 
   @override
