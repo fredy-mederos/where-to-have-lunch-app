@@ -22,12 +22,10 @@ class BlocProvider<T> extends InheritedWidget {
   /// contains a `BlocProvider` instance.
   static T of<T>(BuildContext context) {
     final type = _typeOf<BlocProvider<T>>();
-    final BlocProvider<T> provider =
-        context.ancestorInheritedElementForWidgetOfExactType(type)?.widget;
+    final BlocProvider<T> provider = context.ancestorInheritedElementForWidgetOfExactType(type)?.widget;
 
     if (provider == null) {
-      throw FlutterError(
-          'BlocProvider.of() called with a context that does not contain a Bloc of type $T.\n'
+      throw FlutterError('BlocProvider.of() called with a context that does not contain a Bloc of type $T.\n'
           'No ancestor could be found starting from the context that was passed '
           'to BlocProvider.of<$T>(). This can happen '
           'if the context you use comes from a widget above the BlocProvider.\n'

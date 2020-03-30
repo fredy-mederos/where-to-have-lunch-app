@@ -66,8 +66,7 @@ class CustomLocalizationsDelegate extends LocalizationsDelegate<StringsBase> {
           return true;
         }
 
-        if (supportedLocale.countryCode == null ||
-            supportedLocale.countryCode.isEmpty) {
+        if (supportedLocale.countryCode == null || supportedLocale.countryCode.isEmpty) {
           return true;
         }
       }

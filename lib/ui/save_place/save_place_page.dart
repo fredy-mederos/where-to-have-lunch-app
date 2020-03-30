@@ -28,8 +28,7 @@ class _SavePlacePageState extends StateWithBloC<SavePlacePage, SavePlaceBloC> {
       selectedColor: widget.place?.color ?? bloc.getColors()[0],
     );
     nameFieldController = TextEditingController(text: widget.place?.name ?? "");
-    descriptionFieldController =
-        TextEditingController(text: widget.place?.description ?? "");
+    descriptionFieldController = TextEditingController(text: widget.place?.description ?? "");
   }
 
   @override
@@ -83,8 +82,7 @@ class _SavePlacePageState extends StateWithBloC<SavePlacePage, SavePlaceBloC> {
             child: Form(
               key: formKey,
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: Column(
                   children: [
                     TextFormField(

@@ -6,8 +6,7 @@ import 'package:where_to_have_lunch/utils/extensions.dart';
 @Deprecated("Do not use this in production")
 class ConfigsRepositoryStubImpl implements ConfigsRepository {
   // ignore: close_sinks
-  final BehaviorSubject<Configs> configsController =
-      BehaviorSubject.seeded(Configs(darkMode: false));
+  final BehaviorSubject<Configs> configsController = BehaviorSubject.seeded(Configs(darkMode: false));
 
   @override
   Future<Configs> getConfigs() {

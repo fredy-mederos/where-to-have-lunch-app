@@ -17,8 +17,7 @@ class PlaceDetailPage extends StatefulWidget {
   _PlaceDetailPageState createState() => _PlaceDetailPageState();
 }
 
-class _PlaceDetailPageState
-    extends StateWithBloC<PlaceDetailPage, PlaceDetailsBloC> {
+class _PlaceDetailPageState extends StateWithBloC<PlaceDetailPage, PlaceDetailsBloC> {
   @override
   Widget buildWidget(BuildContext context) {
     return Scaffold(

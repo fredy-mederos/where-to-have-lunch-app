@@ -5,8 +5,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:where_to_have_lunch/domain/usecase/is_connected_to_network_usecase.dart';
 import 'package:where_to_have_lunch/utils/extensions.dart';
 
-class IsConnectedToNetworkUseCaseConnectivityImpl
-    implements IsConnectedToNetworkUseCase {
+class IsConnectedToNetworkUseCaseConnectivityImpl implements IsConnectedToNetworkUseCase {
   BehaviorSubject<bool> isConnectedController;
   StreamSubscription<ConnectivityResult> subscription;
 

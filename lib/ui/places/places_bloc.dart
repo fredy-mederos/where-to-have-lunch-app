@@ -24,7 +24,7 @@ class PlacesBloC with ErrorHandlerBloC implements BaseBloC {
       }, onError: () {
         onError("Error Loading The Places!");
       });
-    }catch(ex){
+    } catch (ex) {
       print(ex);
     }
   }

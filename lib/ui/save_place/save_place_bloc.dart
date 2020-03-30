@@ -6,12 +6,18 @@ import 'package:where_to_have_lunch/domain/repository/place_color_repostitory.da
 import 'package:where_to_have_lunch/domain/repository/place_repository.dart';
 import 'package:where_to_have_lunch/ui/base/bloc/bloc_base.dart';
 import 'package:where_to_have_lunch/ui/base/bloc/bloc_loading.dart';
+import 'package:where_to_have_lunch/utils/logger.dart';
 
 class SavePlaceBloC with LoadingBloC implements BaseBloC {
   final PlaceRepository _placeRepository;
   final PlaceColorRepository _placeColorRepository;
+  final Logger _logger;
 
-  SavePlaceBloC(this._placeRepository, this._placeColorRepository);
+  SavePlaceBloC(
+    this._placeRepository,
+    this._placeColorRepository,
+    this._logger,
+  );
 
   Subject<Place> _onSavedController = BehaviorSubject();
 

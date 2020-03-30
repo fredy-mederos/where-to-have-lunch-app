@@ -10,8 +10,7 @@ class StringsEn implements StringsBase {
 
   String get loginWithGoogle => "Login With Google";
 
-  String get welcomeMessageBody =>
-      "The easiest way of choosing where to have a nice meal with colleges";
+  String get welcomeMessageBody => "The easiest way of choosing where to have a nice meal with colleges";
 
   String get welcomeMessageTitle => "Welcome to \"$appName\"";
 

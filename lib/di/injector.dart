@@ -91,8 +91,7 @@ class Injector {
     container.registerSingleton<ConfigsRepository, ConfigsRepositoryStubImpl>(
       (_) => ConfigsRepositoryStubImpl(),
     );
-    container.registerFactory<IsConnectedToNetworkUseCase,
-        IsConnectedToNetworkUseCaseStubImpl>(
+    container.registerFactory<IsConnectedToNetworkUseCase, IsConnectedToNetworkUseCaseStubImpl>(
       (_) => IsConnectedToNetworkUseCaseStubImpl(),
     );
   }
@@ -104,12 +103,10 @@ class Injector {
     container.registerSingleton<PlaceRepository, PlaceRepositoryFirebaseImpl>(
       (c) => PlaceRepositoryFirebaseImpl(c.resolve()),
     );
-    container
-        .registerSingleton<ConfigsRepository, ConfigsRepositoryFirebaseImpl>(
+    container.registerSingleton<ConfigsRepository, ConfigsRepositoryFirebaseImpl>(
       (c) => ConfigsRepositoryFirebaseImpl(c.resolve()),
     );
-    container.registerFactory<IsConnectedToNetworkUseCase,
-        IsConnectedToNetworkUseCaseConnectivityImpl>(
+    container.registerFactory<IsConnectedToNetworkUseCase, IsConnectedToNetworkUseCaseConnectivityImpl>(
       (_) => IsConnectedToNetworkUseCaseConnectivityImpl(),
     );
   }
@@ -125,7 +122,7 @@ class Injector {
     container.registerFactory((c) => SplashBloC(c.resolve()));
     container.registerFactory((_) => HomeBloC());
     container.registerFactory((c) => SettingsBloC(c.resolve(), c.resolve()));
-    container.registerFactory((c) => SavePlaceBloC(c.resolve(), c.resolve()));
+    container.registerFactory((c) => SavePlaceBloC(c.resolve(), c.resolve(), c.resolve()));
     container.registerFactory((c) => ConfigsBloC(c.resolve()));
     container.registerFactory((c) => PlacesBloC(c.resolve()));
     container.registerFactory((c) => PlaceDetailsBloC(c.resolve()));

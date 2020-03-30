@@ -27,8 +27,7 @@ class _ColorChooserWidgetState extends State<ColorChooserWidget> {
       .map(
         (placeColor) => ColorItemWidget(
           placeColor: placeColor,
-          selected:
-              widget.selectedColorController.selectedColor?.id == placeColor.id,
+          selected: widget.selectedColorController.selectedColor?.id == placeColor.id,
           onTap: () {
             setState(() {
               widget.selectedColorController.selectedColor = placeColor;

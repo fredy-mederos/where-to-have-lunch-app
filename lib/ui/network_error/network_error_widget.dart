@@ -8,8 +8,7 @@ class NetworkErrorWidget extends StatefulWidget {
   _NetworkErrorWidgetState createState() => _NetworkErrorWidgetState();
 }
 
-class _NetworkErrorWidgetState
-    extends StateWithBloC<NetworkErrorWidget, NetworkErrorBloC> {
+class _NetworkErrorWidgetState extends StateWithBloC<NetworkErrorWidget, NetworkErrorBloC> {
   @override
   Widget buildWidget(BuildContext context) {
     return StreamBuilder<bool>(

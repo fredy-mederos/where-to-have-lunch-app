@@ -6,8 +6,7 @@ import 'package:where_to_have_lunch/utils/logger.dart';
 import 'bloc_base.dart';
 
 ///This state already setups a [BlocProvider] as it's main child.
-abstract class StateWithBloC<W extends StatefulWidget, B extends BaseBloC>
-    extends State<W> {
+abstract class StateWithBloC<W extends StatefulWidget, B extends BaseBloC> extends State<W> {
   ///Current bloc instance
   B bloc;
   Logger logger;

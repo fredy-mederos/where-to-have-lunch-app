@@ -7,7 +7,6 @@ import 'package:where_to_have_lunch/ui/base/bloc/bloc_state.dart';
 import 'package:where_to_have_lunch/ui/base/icon_button_widget.dart';
 import 'package:where_to_have_lunch/ui/base/on_init_widget.dart';
 import 'package:where_to_have_lunch/ui/base/page_background_widget.dart';
-import 'package:where_to_have_lunch/ui/base/page_with_loading.dart';
 import 'package:where_to_have_lunch/ui/place_details/place_detail_page.dart';
 import 'package:where_to_have_lunch/ui/places/item_place.dart';
 import 'package:where_to_have_lunch/ui/places/places_bloc.dart';
@@ -39,10 +38,7 @@ class _PlacesPageState extends StateWithBloC<PlacesPage, PlacesBloC> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         actions: [
-          FlatButton.icon(
-              onPressed: addPlace,
-              icon: Icon(MdiIcons.plus),
-              label: Text(R.string.addAPlace)),
+          FlatButton.icon(onPressed: addPlace, icon: Icon(MdiIcons.plus), label: Text(R.string.addAPlace)),
         ],
       ),
       body: OnInitWidget(

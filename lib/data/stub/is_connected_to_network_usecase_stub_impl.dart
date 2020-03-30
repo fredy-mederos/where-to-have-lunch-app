@@ -5,8 +5,7 @@ import 'package:where_to_have_lunch/domain/usecase/is_connected_to_network_useca
 import 'package:where_to_have_lunch/utils/extensions.dart';
 
 @Deprecated("Do not use this in production")
-class IsConnectedToNetworkUseCaseStubImpl
-    implements IsConnectedToNetworkUseCase {
+class IsConnectedToNetworkUseCaseStubImpl implements IsConnectedToNetworkUseCase {
   BehaviorSubject<bool> isConnectedController = BehaviorSubject<bool>();
 
   Stream<bool> get isConnected => isConnectedController.stream;

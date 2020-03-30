@@ -25,9 +25,7 @@ class PlaceRepositoryFirebaseImpl implements PlaceRepository {
   void loadData() async {
     final api = await getApi();
     api.streamDataCollection().listen((data) {
-      final places = data.documents
-          .map((item) => placeMapper.placeFromMap(item.data, item.documentID))
-          .toList();
+      final places = data.documents.map((item) => placeMapper.placeFromMap(item.data, item.documentID)).toList();
       placesController.sink.add(places);
     });
   }
@@ -59,19 +57,19 @@ class PlaceRepositoryFirebaseImpl implements PlaceRepository {
   @override
   Future removePlace(Place place) async {
     final api = await getApi();
-    await api.removeDocument(place.id);
+    api.removeDocument(place.id);
   }
 
   @override
   Future addPlace(Place place) async {
     final api = await getApi();
-    await api.addDocument(placeMapper.mapFrommPlace(place));
+    api.addDocument(placeMapper.mapFrommPlace(place));
   }
 
   @override
   Future savePlace(Place place) async {
     final api = await getApi();
-    await api.updateDocument(
+    api.updateDocument(
       placeMapper.mapFrommPlace(place),
       place.id,
     );

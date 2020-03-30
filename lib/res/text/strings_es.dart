@@ -10,8 +10,7 @@ class StringsEs implements StringsBase {
 
   String get loginWithGoogle => "Entra con Google";
 
-  String get welcomeMessageBody =>
-      "La forma mas facil de escoger donde tener un buen almuerzo con tus colegas";
+  String get welcomeMessageBody => "La forma mas facil de escoger donde tener un buen almuerzo con tus colegas";
 
   String get welcomeMessageTitle => "Bienvenido a \"$appName\"";
 

@@ -17,16 +17,14 @@ class UserRepositoryFirebaseImpl implements UserRepository {
     final GoogleSignIn _googleSignIn = GoogleSignIn();
 
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
+    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
 
     final AuthCredential credential = GoogleAuthProvider.getCredential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
 
-    final FirebaseUser user =
-        (await auth.signInWithCredential(credential)).user;
+    final FirebaseUser user = (await auth.signInWithCredential(credential)).user;
 
     return mapper.fromFirebase(user);
   }

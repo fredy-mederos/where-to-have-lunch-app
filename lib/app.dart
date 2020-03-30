@@ -15,8 +15,7 @@ class WhereToHaveLunchApp extends StatefulWidget {
   _WhereToHaveLunchAppState createState() => _WhereToHaveLunchAppState();
 }
 
-class _WhereToHaveLunchAppState
-    extends StateWithBloC<WhereToHaveLunchApp, ConfigsBloC> {
+class _WhereToHaveLunchAppState extends StateWithBloC<WhereToHaveLunchApp, ConfigsBloC> {
   @override
   void initState() {
     super.initState();

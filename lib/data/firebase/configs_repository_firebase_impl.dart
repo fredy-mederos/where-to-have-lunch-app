@@ -14,8 +14,7 @@ class ConfigsRepositoryFirebaseImpl implements ConfigsRepository {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   // ignore: close_sinks
-  final BehaviorSubject<Configs> configsController =
-      BehaviorSubject.seeded(Configs(darkMode: false));
+  final BehaviorSubject<Configs> configsController = BehaviorSubject.seeded(Configs(darkMode: false));
 
   ConfigsRepositoryFirebaseImpl(this.configMapper) {
     loadData();
@@ -25,8 +24,7 @@ class ConfigsRepositoryFirebaseImpl implements ConfigsRepository {
     try {
       String userId = await getUserId();
       firestoreApi.streamDocumentById(userId).listen((map) {
-        final data = configMapper.configsFromMap(map.data ?? {}) ??
-            Configs(darkMode: false);
+        final data = configMapper.configsFromMap(map.data ?? {}) ?? Configs(darkMode: false);
         configsController.sink.add(data);
       });
     } catch (ex) {}
@@ -37,8 +35,7 @@ class ConfigsRepositoryFirebaseImpl implements ConfigsRepository {
     try {
       String userId = await getUserId();
       final map = await firestoreApi.getDocumentById(userId);
-      return configMapper.configsFromMap(map.data ?? {}) ??
-          Configs(darkMode: false);
+      return configMapper.configsFromMap(map.data ?? {}) ?? Configs(darkMode: false);
     } catch (ex) {
       return Configs(darkMode: false);
     }
