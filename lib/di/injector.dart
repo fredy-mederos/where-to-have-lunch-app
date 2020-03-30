@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:where_to_have_lunch/data/firebase/config_mapper.dart';
 import 'package:where_to_have_lunch/data/firebase/configs_repository_firebase_impl.dart';
@@ -53,35 +54,23 @@ class Injector {
 
   T getDependency<T>() => container.resolve();
 
-  static initDemo() {
+  static init({@required Mode mode, @required Client client}) {
     if (instance == null) {
-      instance = Injector._startDemo();
+      instance = Injector._start(mode: mode, client: client);
     }
   }
 
-  static initProd() {
-    if (instance == null) {
-      instance = Injector._startProd();
-    }
+  Injector._start({@required Mode mode, @required Client client}) {
+    if (mode == Mode.STUB)
+      _registerDemo(client);
+    else if (mode == Mode.PROD) _registerProd(client);
+
+    _registerCommon(client);
+    _registerBloCs(client);
+    _registerMappers(client);
   }
 
-  Injector._startDemo() {
-    _registerDemo();
-    _initialize();
-  }
-
-  Injector._startProd() {
-    _registerProd();
-    _initialize();
-  }
-
-  _initialize() {
-    _registerCommon();
-    _registerBloCs();
-    _registerMappers();
-  }
-
-  _registerDemo() {
+  _registerDemo(Client client) {
     container.registerSingleton<UserRepository, UserRepositoryStubImpl>(
       (_) => UserRepositoryStubImpl(),
     );
@@ -96,7 +85,7 @@ class Injector {
     );
   }
 
-  _registerProd() {
+  _registerProd(Client client) {
     container.registerSingleton<UserRepository, UserRepositoryFirebaseImpl>(
       (c) => UserRepositoryFirebaseImpl(c.resolve(), c.resolve()),
     );
@@ -111,13 +100,13 @@ class Injector {
     );
   }
 
-  _registerMappers() {
+  _registerMappers(Client client) {
     container.registerFactory((_) => UserMapper());
     container.registerFactory((c) => PlaceMapper(c.resolve()));
     container.registerFactory((_) => ConfigMapper());
   }
 
-  _registerBloCs() {
+  _registerBloCs(Client client) {
     container.registerFactory((c) => LoginBloC(c.resolve(), c.resolve()));
     container.registerFactory((c) => SplashBloC(c.resolve()));
     container.registerFactory((_) => HomeBloC());
@@ -129,7 +118,7 @@ class Injector {
     container.registerFactory((c) => NetworkErrorBloC(c.resolve()));
   }
 
-  _registerCommon() {
+  _registerCommon(Client client) {
     if (isInDebugMode()) {
       container.registerFactory<Logger, LoggerImpl>((_) => LoggerImpl());
     } else {
@@ -143,3 +132,7 @@ class Injector {
     );
   }
 }
+
+enum Mode { STUB, PROD }
+
+enum Client { WEB, MOBILE }
