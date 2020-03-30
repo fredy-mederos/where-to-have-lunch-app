@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:where_to_have_lunch/res/R.dart';
+import 'package:where_to_have_lunch/ui/network_error/network_error_widget.dart';
 
 class LateralMenuWidget extends StatelessWidget {
   final Function(int) onPageSelected;
@@ -20,8 +21,10 @@ class LateralMenuWidget extends StatelessWidget {
         elevation: 2,
         child: Container(
           width: 250,
-          child: ListView(
-            children: <Widget>[
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              NetworkErrorWidget(),
               ListTile(
                 selected: currentPage == 0,
                 leading: Icon(MdiIcons.dice5Outline),
