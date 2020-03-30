@@ -80,7 +80,7 @@ class _PlacesPageState extends StateWithBloC<PlacesPage, PlacesBloC> {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
+              crossAxisCount: R.isSmallWidthSize(context) ? 3 : 4,
               crossAxisSpacing: 5,
               mainAxisSpacing: 5,
             ),

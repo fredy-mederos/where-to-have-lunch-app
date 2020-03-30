@@ -23,18 +23,22 @@ class ItemPlace extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                place.name,
-                style: TextStyle(
-                  fontSize: 18,
-                  color: place.color.textColor,
+              Expanded(
+                child: Text(
+                  place.name,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: place.color.textColor,
+                  ),
                 ),
               ),
-              Text(
-                place.description,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: place.color.textColor,
+              Expanded(
+                child: Text(
+                  place.description,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: place.color.textColor,
+                  ),
                 ),
               ),
             ],
