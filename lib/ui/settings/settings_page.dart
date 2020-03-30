@@ -28,23 +28,35 @@ class _SettingsPageState extends StateWithBloC<SettingsPage, SettingsBloC> {
 
   @override
   Widget buildWidget(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0),
-      body: PageBackgroundWidget(
-        iconRes: MdiIcons.cog,
-        child: body(),
-      ),
-    );
+    final smallHeight = R.isSmallHeightSize(context);
+
+    return smallHeight ? smallBody() : bigBody();
   }
 
-  Widget body() => Padding(
-        padding: const EdgeInsets.only(bottom: 40, right: 16, left: 16),
+  Widget bigBody() => Scaffold(
+        appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0),
+        body: PageBackgroundWidget(
+          iconRes: MdiIcons.cog,
+          child: body(false),
+        ),
+      );
+
+  Widget smallBody() => Scaffold(
+        body: PageBackgroundWidget(
+            iconRes: MdiIcons.cog,
+            child: SingleChildScrollView(
+              child: body(true),
+            )),
+      );
+
+  Widget body(bool smallHeight) => Padding(
+        padding: EdgeInsets.only(top: smallHeight ? 40 : 0, bottom: smallHeight ? 10 : 40, right: 16, left: 16),
         child: Column(
           children: [
             title(),
             Container(height: 40),
             configsCard(),
-            Expanded(child: Container()),
+            smallHeight ? Container(height: 20) : Expanded(child: Container()),
             IconButtonWidget(
               iconData: MdiIcons.logout,
               label: R.string.logout,

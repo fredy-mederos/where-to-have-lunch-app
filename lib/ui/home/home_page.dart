@@ -19,7 +19,7 @@ class _HomePageState extends StateWithBloC<HomePage, HomeBloC> {
 
   @override
   Widget buildWidget(BuildContext context) {
-    if (R.isSmallScreenSize(context))
+    if (R.isSmallWidthSize(context))
       return mobileLayout();
     else
       return tabletLayout();
