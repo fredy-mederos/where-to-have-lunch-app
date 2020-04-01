@@ -4,6 +4,7 @@ import 'package:where_to_have_lunch/domain/models/place.dart';
 import 'package:where_to_have_lunch/ui/base/bloc/bloc_state.dart';
 import 'package:where_to_have_lunch/ui/place_details/place_details_bloc.dart';
 import 'package:where_to_have_lunch/ui/save_place/save_place_page.dart';
+import 'package:where_to_have_lunch/utils/navigation_utils.dart';
 
 class PlaceDetailPage extends StatefulWidget {
   final Place place;
@@ -42,13 +43,9 @@ class _PlaceDetailPageState extends StateWithBloC<PlaceDetailPage, PlaceDetailsB
   }
 
   void navigateToSavePlacePage() async {
-    final place = await Navigator.push(
+    final place = await NavigatorUtils.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => SavePlacePage(
-          place: widget.place,
-        ),
-      ),
+      SavePlacePage(place: widget.place),
     );
     if (place != null) {
       setState(() {

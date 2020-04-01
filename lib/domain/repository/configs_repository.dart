@@ -7,4 +7,6 @@ abstract class ConfigsRepository {
   Stream<Configs> getConfigsStream();
 
   Future setDarkMode({@required bool darkMode});
+
+  Future logOut();
 }

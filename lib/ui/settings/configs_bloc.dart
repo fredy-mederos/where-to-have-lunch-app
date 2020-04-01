@@ -17,6 +17,7 @@ class ConfigsBloC implements BaseBloC {
   Stream<Configs> get configsStream => _configsController.stream;
 
   loadConfigs() async {
+    subscription?.cancel();
     subscription = _configsRepository.getConfigsStream().listen((configs) {
       _configsController.sinkAddSafe(configs);
     });

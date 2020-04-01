@@ -16,9 +16,9 @@ class LateralMenuWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: 4),
+      padding: EdgeInsets.only(right: 2),
       child: Material(
-        elevation: 2,
+        elevation: 4,
         child: Container(
           width: 250,
           child: Column(
