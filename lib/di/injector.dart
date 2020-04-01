@@ -110,7 +110,7 @@ class Injector {
     container.registerFactory((c) => LoginBloC(c.resolve(), c.resolve()));
     container.registerFactory((c) => SplashBloC(c.resolve()));
     container.registerFactory((_) => HomeBloC());
-    container.registerFactory((c) => SettingsBloC(c.resolve(), c.resolve()));
+    container.registerFactory((c) => SettingsBloC(c.resolve(), c.resolve(), c.resolve()));
     container.registerFactory((c) => SavePlaceBloC(c.resolve(), c.resolve(), c.resolve()));
     container.registerFactory((c) => ConfigsBloC(c.resolve()));
     container.registerFactory((c) => PlacesBloC(c.resolve()));

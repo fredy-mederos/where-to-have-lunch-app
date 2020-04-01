@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:where_to_have_lunch/app_routes.dart';
 import 'package:where_to_have_lunch/res/R.dart';
 import 'package:where_to_have_lunch/ui/base/bloc/bloc_state.dart';
 import 'package:where_to_have_lunch/ui/choose/choose_page.dart';
+import 'package:where_to_have_lunch/ui/common/inner_navigator.dart';
 import 'package:where_to_have_lunch/ui/home/home_bloc.dart';
 import 'package:where_to_have_lunch/ui/navigation_menu/bottom_menu_widget.dart';
 import 'package:where_to_have_lunch/ui/navigation_menu/lateral_menu_widget.dart';
@@ -16,14 +18,27 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends StateWithBloC<HomePage, HomeBloC> {
   int currentIndex = 0;
+  final navigatorKey = GlobalKey<NavigatorState>();
 
   @override
-  Widget buildWidget(BuildContext context) {
+  Widget buildWidget(BuildContext context) => getBody(
+        child: getBodyLayout(),
+      );
+
+  Widget getBodyLayout() {
     if (R.isSmallWidthSize(context))
       return mobileLayout();
     else
       return tabletLayout();
   }
+
+  Widget getBody({Widget child}) => WillPopScope(
+        onWillPop: () async {
+          if (currentIndex != 1) return true;
+          return !await navigatorKey.currentState.maybePop();
+        },
+        child: child,
+      );
 
   Widget mobileLayout() => Scaffold(
         body: Column(
@@ -55,13 +70,23 @@ class _HomePageState extends StateWithBloC<HomePage, HomeBloC> {
       case 0:
         return ChoosePage();
       case 1:
-        return PlacesPage();
+        return getPlacesPageWidget();
       case 2:
         return SettingsPage();
     }
     return Center(
       child: Text("No Page"),
     );
+  }
+
+  Widget getPlacesPageWidget() {
+    if (R.isSmallWidthSize(context))
+      return PlacesPage();
+    else //it is a tablet device use an inner navigator
+      return InnerNavigator(
+        navigatorKey: navigatorKey,
+        child: PlacesPage(),
+      );
   }
 
   void onPageSelected(int index) {

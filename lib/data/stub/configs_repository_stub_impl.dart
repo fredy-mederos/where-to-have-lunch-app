@@ -25,4 +25,9 @@ class ConfigsRepositoryStubImpl implements ConfigsRepository {
 
   @override
   Stream<Configs> getConfigsStream() => configsController.stream;
+
+  @override
+  Future logOut() {
+    configsController.close();
+  }
 }

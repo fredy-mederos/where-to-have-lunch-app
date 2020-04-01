@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:where_to_have_lunch/app_routes.dart';
 import 'package:where_to_have_lunch/domain/models/place.dart';
 import 'package:where_to_have_lunch/res/R.dart';
 import 'package:where_to_have_lunch/ui/base/bloc/bloc_state.dart';
@@ -10,6 +9,8 @@ import 'package:where_to_have_lunch/ui/base/page_background_widget.dart';
 import 'package:where_to_have_lunch/ui/place_details/place_detail_page.dart';
 import 'package:where_to_have_lunch/ui/places/item_place.dart';
 import 'package:where_to_have_lunch/ui/places/places_bloc.dart';
+import 'package:where_to_have_lunch/ui/save_place/save_place_page.dart';
+import 'package:where_to_have_lunch/utils/navigation_utils.dart';
 
 class PlacesPage extends StatefulWidget {
   @override
@@ -106,17 +107,10 @@ class _PlacesPageState extends StateWithBloC<PlacesPage, PlacesBloC> {
       );
 
   void navigateToPlace(Place place) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => PlaceDetailPage(
-          place: place,
-        ),
-      ),
-    );
+    NavigatorUtils.push(context, PlaceDetailPage(place: place));
   }
 
   void addPlace() {
-    Navigator.pushNamed(context, AppRoutes.ADD_PLACE);
+    NavigatorUtils.push(context, SavePlacePage());
   }
 }

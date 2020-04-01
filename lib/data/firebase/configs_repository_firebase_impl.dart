@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:where_to_have_lunch/data/firebase/config_mapper.dart';
@@ -10,20 +13,20 @@ class ConfigsRepositoryFirebaseImpl implements ConfigsRepository {
 
   static const String USERS_COLLECTION = "users";
 
-  FirestoreApi firestoreApi = FirestoreApi(USERS_COLLECTION);
+  FirestoreApi _firestoreApi;
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   // ignore: close_sinks
   final BehaviorSubject<Configs> configsController = BehaviorSubject.seeded(Configs(darkMode: false));
 
-  ConfigsRepositoryFirebaseImpl(this.configMapper) {
-    loadData();
-  }
+  StreamSubscription<DocumentSnapshot> subscription;
 
-  void loadData() async {
+  ConfigsRepositoryFirebaseImpl(this.configMapper);
+
+  void loadData(FirestoreApi firestoreApi) async {
     try {
       String userId = await getUserId();
-      firestoreApi.streamDocumentById(userId).listen((map) {
+      subscription = firestoreApi.streamDocumentById(userId).listen((map) {
         final data = configMapper.configsFromMap(map.data ?? {}) ?? Configs(darkMode: false);
         configsController.sink.add(data);
       });
@@ -34,7 +37,7 @@ class ConfigsRepositoryFirebaseImpl implements ConfigsRepository {
   Future<Configs> getConfigs() async {
     try {
       String userId = await getUserId();
-      final map = await firestoreApi.getDocumentById(userId);
+      final map = await getApi().getDocumentById(userId);
       return configMapper.configsFromMap(map.data ?? {}) ?? Configs(darkMode: false);
     } catch (ex) {
       return Configs(darkMode: false);
@@ -45,7 +48,7 @@ class ConfigsRepositoryFirebaseImpl implements ConfigsRepository {
   Future setDarkMode({bool darkMode}) async {
     String userId = await getUserId();
     final config = Configs(darkMode: darkMode);
-    await firestoreApi.setData(
+    await getApi().setData(
       configMapper.mapFromConfig(config),
       userId,
     );
@@ -59,4 +62,18 @@ class ConfigsRepositoryFirebaseImpl implements ConfigsRepository {
 
   @override
   Stream<Configs> getConfigsStream() => configsController.stream;
+
+  FirestoreApi getApi() {
+    if (_firestoreApi != null) return _firestoreApi;
+
+    _firestoreApi = FirestoreApi(USERS_COLLECTION);
+    loadData(_firestoreApi);
+    return _firestoreApi;
+  }
+
+  @override
+  Future logOut() async {
+    _firestoreApi = null;
+    subscription?.cancel();
+  }
 }

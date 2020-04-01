@@ -8,12 +8,10 @@ class AppRoutes {
   static final String SPLASH = "/";
   static final String LOGIN = "/login";
   static final String HOME = "/home";
-  static final String ADD_PLACE = "/add_place";
 
   static Map<String, WidgetBuilder> routes() => {
         SPLASH: (context) => SplashPage(),
         LOGIN: (context) => LoginPage(),
         HOME: (context) => HomePage(),
-        ADD_PLACE: (context) => SavePlacePage(),
       };
 }
