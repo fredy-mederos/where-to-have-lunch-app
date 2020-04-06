@@ -1,4 +1,4 @@
-package com.example.where_to_have_lunch
+package com.asdevel.where_to_have_lunch
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
