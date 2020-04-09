@@ -1,12 +1,13 @@
 import 'dart:async';
 
 import 'package:rxdart/rxdart.dart';
+import 'package:where_to_have_lunch/di/injector.dart';
 import 'package:where_to_have_lunch/domain/models/configs.dart';
 import 'package:where_to_have_lunch/domain/repository/configs_repository.dart';
 import 'package:where_to_have_lunch/ui/base/viewmodel/base_viewmodel.dart';
 
 class ConfigsViewModel implements BaseViewModel {
-  final ConfigsRepository _configsRepository;
+  final DependencyProvider<ConfigsRepository> _configsRepository;
 
   StreamSubscription<Configs> subscription;
 
@@ -18,13 +19,13 @@ class ConfigsViewModel implements BaseViewModel {
 
   loadConfigs() async {
     subscription?.cancel();
-    subscription = _configsRepository.getConfigsStream().listen((configs) {
+    subscription = _configsRepository().getConfigsStream().listen((configs) {
       _configsController.sinkAddSafe(configs);
     });
   }
 
   setDarkMode({bool darkMode}) async {
-    await _configsRepository.setDarkMode(darkMode: darkMode);
+    await _configsRepository().setDarkMode(darkMode: darkMode);
   }
 
   @override

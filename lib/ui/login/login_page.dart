@@ -78,11 +78,15 @@ class _LoginPageState extends StateWithViewModel<LoginPage, LoginViewModel> {
   Widget loginButton({bool isLoading}) => IconButtonWidget(
         iconData: MdiIcons.google,
         label: R.string.loginWithGoogle,
-        onPressed: isLoading
-            ? null
-            : () {
-                viewModel.login();
-              },
+        onPressed: isLoading ? null : viewModel.login,
+      );
+
+  Widget demoButton({bool isLoading}) => SizedBox(
+        width: 200,
+        child: RaisedButton(
+          onPressed: isLoading ? null : viewModel.enterInDemoMode,
+          child: Text(R.string.demoMode),
+        ),
       );
 
   Widget loginSection({bool isLoading}) {
@@ -90,6 +94,8 @@ class _LoginPageState extends StateWithViewModel<LoginPage, LoginViewModel> {
       children: [
         isLoading ? CircularProgressIndicator() : Container(),
         loginButton(isLoading: isLoading),
+        Container(height: 10),
+        demoButton(isLoading: isLoading),
       ],
     );
   }

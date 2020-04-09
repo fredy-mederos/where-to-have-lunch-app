@@ -45,4 +45,6 @@ class StringsEn implements StringsBase {
   }
 
   String get youAreOffline => "You are offline";
+
+  String get demoMode => "Demo Mode";
 }
