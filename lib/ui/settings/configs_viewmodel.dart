@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:rxdart/rxdart.dart';
 import 'package:where_to_have_lunch/domain/models/configs.dart';
 import 'package:where_to_have_lunch/domain/repository/configs_repository.dart';
-import 'package:where_to_have_lunch/ui/base/bloc/bloc_base.dart';
+import 'package:where_to_have_lunch/ui/base/viewmodel/base_viewmodel.dart';
 
-class ConfigsBloC implements BaseBloC {
+class ConfigsViewModel implements BaseViewModel {
   final ConfigsRepository _configsRepository;
 
   StreamSubscription<Configs> subscription;
 
-  ConfigsBloC(this._configsRepository);
+  ConfigsViewModel(this._configsRepository);
 
   Subject<Configs> _configsController = BehaviorSubject();
 

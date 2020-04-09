@@ -4,16 +4,16 @@ import 'package:where_to_have_lunch/domain/models/place.dart';
 import 'package:where_to_have_lunch/domain/models/place_color.dart';
 import 'package:where_to_have_lunch/domain/repository/place_color_repostitory.dart';
 import 'package:where_to_have_lunch/domain/repository/place_repository.dart';
-import 'package:where_to_have_lunch/ui/base/bloc/bloc_base.dart';
-import 'package:where_to_have_lunch/ui/base/bloc/bloc_loading.dart';
+import 'package:where_to_have_lunch/ui/base/viewmodel/base_viewmodel.dart';
+import 'package:where_to_have_lunch/ui/base/viewmodel/loading_viewmodel.dart';
 import 'package:where_to_have_lunch/utils/logger.dart';
 
-class SavePlaceBloC with LoadingBloC implements BaseBloC {
+class SavePlaceViewModel with LoadingViewModel implements BaseViewModel {
   final PlaceRepository _placeRepository;
   final PlaceColorRepository _placeColorRepository;
   final Logger _logger;
 
-  SavePlaceBloC(
+  SavePlaceViewModel(
     this._placeRepository,
     this._placeColorRepository,
     this._logger,
@@ -51,6 +51,6 @@ class SavePlaceBloC with LoadingBloC implements BaseBloC {
   @override
   void dispose() {
     _onSavedController.close();
-    disposeLoadingBloC();
+    disposeLoadingViewModel();
   }
 }

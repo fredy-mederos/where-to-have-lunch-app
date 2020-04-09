@@ -1,35 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:where_to_have_lunch/app_routes.dart';
-import 'package:where_to_have_lunch/di/bloc_provider.dart';
+import 'package:where_to_have_lunch/di/viewmodel_provider.dart';
 import 'package:where_to_have_lunch/res/R.dart';
-import 'package:where_to_have_lunch/ui/base/bloc/bloc_state.dart';
 import 'package:where_to_have_lunch/ui/base/icon_button_widget.dart';
 import 'package:where_to_have_lunch/ui/base/on_init_widget.dart';
 import 'package:where_to_have_lunch/ui/base/page_background_widget.dart';
-import 'package:where_to_have_lunch/ui/login/login_bloc.dart';
-import 'package:where_to_have_lunch/ui/settings/configs_bloc.dart';
+import 'package:where_to_have_lunch/ui/base/viewmodel/state_with_viewmodel.dart';
+import 'package:where_to_have_lunch/ui/login/login_viewmodel.dart';
+import 'package:where_to_have_lunch/ui/settings/configs_viewmodel.dart';
 
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends StateWithBloC<LoginPage, LoginBloC> {
-  ConfigsBloC blocConfigs;
+class _LoginPageState extends StateWithViewModel<LoginPage, LoginViewModel> {
+  ConfigsViewModel configsViewModel;
 
   @override
   void initState() {
     super.initState();
-    blocConfigs = BlocProvider.of(context);
-    bloc.onUserLogin.listen((user) async {
-      await blocConfigs.loadConfigs();
+    configsViewModel = ViewModelProvider.of(context);
+    viewModel.onUserLogin.listen((user) async {
+      await configsViewModel.loadConfigs();
       Navigator.pushReplacementNamed(context, AppRoutes.HOME);
     });
   }
 
   void registerErrorStream(BuildContext cntx) {
-    bloc.errorMessageStream.listen((error) {
+    viewModel.errorMessageStream.listen((error) {
       if (error != null)
         Scaffold.of(cntx).showSnackBar(SnackBar(
           content: Text(error),
@@ -66,7 +66,7 @@ class _LoginPageState extends StateWithBloC<LoginPage, LoginBloC> {
             ),
             Expanded(child: Container()),
             StreamBuilder<bool>(
-                stream: bloc.isLoadingStream,
+                stream: viewModel.isLoadingStream,
                 initialData: false,
                 builder: (context, snapshot) {
                   return loginSection(isLoading: snapshot.data);
@@ -81,7 +81,7 @@ class _LoginPageState extends StateWithBloC<LoginPage, LoginBloC> {
         onPressed: isLoading
             ? null
             : () {
-                bloc.login();
+                viewModel.login();
               },
       );
 

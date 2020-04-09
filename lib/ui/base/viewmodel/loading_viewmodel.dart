@@ -1,7 +1,7 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:where_to_have_lunch/utils/extensions.dart';
 
-class LoadingBloC {
+class LoadingViewModel {
   BehaviorSubject<bool> _loadingController = BehaviorSubject();
 
   Stream<bool> get isLoadingStream => _loadingController.stream;
@@ -12,7 +12,7 @@ class LoadingBloC {
     _loadingController.sinkAddSafe(loading);
   }
 
-  void disposeLoadingBloC() {
+  void disposeLoadingViewModel() {
     _loadingController.close();
   }
 }

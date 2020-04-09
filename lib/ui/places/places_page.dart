@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:where_to_have_lunch/domain/models/place.dart';
 import 'package:where_to_have_lunch/res/R.dart';
-import 'package:where_to_have_lunch/ui/base/bloc/bloc_state.dart';
 import 'package:where_to_have_lunch/ui/base/icon_button_widget.dart';
 import 'package:where_to_have_lunch/ui/base/on_init_widget.dart';
 import 'package:where_to_have_lunch/ui/base/page_background_widget.dart';
+import 'package:where_to_have_lunch/ui/base/viewmodel/state_with_viewmodel.dart';
 import 'package:where_to_have_lunch/ui/place_details/place_detail_page.dart';
 import 'package:where_to_have_lunch/ui/places/item_place.dart';
-import 'package:where_to_have_lunch/ui/places/places_bloc.dart';
+import 'package:where_to_have_lunch/ui/places/places_viewmodel.dart';
 import 'package:where_to_have_lunch/ui/save_place/save_place_page.dart';
 import 'package:where_to_have_lunch/utils/navigation_utils.dart';
 
@@ -17,15 +17,15 @@ class PlacesPage extends StatefulWidget {
   _PlacesPageState createState() => _PlacesPageState();
 }
 
-class _PlacesPageState extends StateWithBloC<PlacesPage, PlacesBloC> {
+class _PlacesPageState extends StateWithViewModel<PlacesPage, PlacesViewModel> {
   @override
   void initState() {
     super.initState();
-    bloc.loadPlaces();
+    viewModel.loadPlaces();
   }
 
   void registerErrorStream(BuildContext cntx) {
-    bloc.errorMessageStream.listen((error) {
+    viewModel.errorMessageStream.listen((error) {
       if (error != null)
         Scaffold.of(cntx).showSnackBar(SnackBar(
           content: Text(error),
@@ -59,7 +59,7 @@ class _PlacesPageState extends StateWithBloC<PlacesPage, PlacesBloC> {
 
   Widget body() => StreamBuilder<List<Place>>(
       initialData: [],
-      stream: bloc.placesStream,
+      stream: viewModel.placesStream,
       builder: (context, snapshot) {
         final places = snapshot.data ?? [];
         return Column(

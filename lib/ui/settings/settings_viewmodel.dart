@@ -3,14 +3,14 @@ import 'package:where_to_have_lunch/domain/models/user.dart';
 import 'package:where_to_have_lunch/domain/repository/configs_repository.dart';
 import 'package:where_to_have_lunch/domain/repository/place_repository.dart';
 import 'package:where_to_have_lunch/domain/repository/user_repository.dart';
-import 'package:where_to_have_lunch/ui/base/bloc/bloc_base.dart';
+import 'package:where_to_have_lunch/ui/base/viewmodel/base_viewmodel.dart';
 
-class SettingsBloC implements BaseBloC {
+class SettingsViewModel implements BaseViewModel {
   final UserRepository _userRepository;
   final PlaceRepository _placeRepository;
   final ConfigsRepository _configsRepository;
 
-  SettingsBloC(this._userRepository, this._placeRepository, this._configsRepository);
+  SettingsViewModel(this._userRepository, this._placeRepository, this._configsRepository);
 
   PublishSubject<User> _currentUserController = PublishSubject();
 

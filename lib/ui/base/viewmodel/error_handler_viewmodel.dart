@@ -1,7 +1,7 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:where_to_have_lunch/utils/extensions.dart';
 
-class ErrorHandlerBloC {
+class ErrorHandlerViewModel {
   BehaviorSubject<String> _errorMessageController = new BehaviorSubject();
 
   Stream<String> get errorMessageStream => _errorMessageController.stream;
@@ -29,7 +29,7 @@ class ErrorHandlerBloC {
     _errorMessageController.sinkAddSafe(null);
   }
 
-  void disposeErrorHandlerBloC() {
+  void disposeErrorHandlerViewModel() {
     print('Error Handler Dispose');
     _errorMessageController.close();
   }

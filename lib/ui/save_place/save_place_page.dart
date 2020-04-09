@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:where_to_have_lunch/domain/models/place.dart';
 import 'package:where_to_have_lunch/res/R.dart';
-import 'package:where_to_have_lunch/ui/base/bloc/bloc_state.dart';
 import 'package:where_to_have_lunch/ui/base/page_background_widget.dart';
+import 'package:where_to_have_lunch/ui/base/viewmodel/state_with_viewmodel.dart';
 import 'package:where_to_have_lunch/ui/save_place/color_chooser_widget.dart';
-import 'package:where_to_have_lunch/ui/save_place/save_place_bloc.dart';
+import 'package:where_to_have_lunch/ui/save_place/save_place_viewmodel.dart';
 import 'package:where_to_have_lunch/utils/validators.dart';
 
 class SavePlacePage extends StatefulWidget {
@@ -17,7 +17,7 @@ class SavePlacePage extends StatefulWidget {
   _SavePlacePageState createState() => _SavePlacePageState();
 }
 
-class _SavePlacePageState extends StateWithBloC<SavePlacePage, SavePlaceBloC> {
+class _SavePlacePageState extends StateWithViewModel<SavePlacePage, SavePlaceViewModel> {
   TextEditingController nameFieldController;
   TextEditingController descriptionFieldController;
   final formKey = GlobalKey<FormState>();
@@ -25,7 +25,7 @@ class _SavePlacePageState extends StateWithBloC<SavePlacePage, SavePlaceBloC> {
 
   void initControllers() {
     selectedColorController = SelectedColorController(
-      selectedColor: widget.place?.color ?? bloc.getColors()[0],
+      selectedColor: widget.place?.color ?? viewModel.getColors()[0],
     );
     nameFieldController = TextEditingController(text: widget.place?.name ?? "");
     descriptionFieldController = TextEditingController(text: widget.place?.description ?? "");
@@ -35,7 +35,7 @@ class _SavePlacePageState extends StateWithBloC<SavePlacePage, SavePlaceBloC> {
   void initState() {
     super.initState();
     initControllers();
-    bloc.onSavedStream.listen((place) {
+    viewModel.onSavedStream.listen((place) {
       if (place != null) {
         Navigator.pop(context, place);
       }
@@ -104,7 +104,7 @@ class _SavePlacePageState extends StateWithBloC<SavePlacePage, SavePlaceBloC> {
                     ),
                     Container(height: 10),
                     ColorChooserWidget(
-                      colors: bloc.getColors(),
+                      colors: viewModel.getColors(),
                       selectedColorController: selectedColorController,
                     ),
                     Container(height: 10),
@@ -123,7 +123,7 @@ class _SavePlacePageState extends StateWithBloC<SavePlacePage, SavePlaceBloC> {
       );
 
   Widget saveButton() => StreamBuilder<bool>(
-        stream: bloc.isLoadingStream,
+        stream: viewModel.isLoadingStream,
         initialData: false,
         builder: (context, snapshot) {
           final isLoading = snapshot.data ?? false;
@@ -135,7 +135,7 @@ class _SavePlacePageState extends StateWithBloC<SavePlacePage, SavePlaceBloC> {
                   label: Text(R.string.save),
                   onPressed: () {
                     if (formKey.currentState.validate()) {
-                      bloc.addPlace(
+                      viewModel.addPlace(
                         id: widget.place?.id,
                         name: nameFieldController.text,
                         description: descriptionFieldController.text,
