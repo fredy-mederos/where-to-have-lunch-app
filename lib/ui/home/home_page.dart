@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:where_to_have_lunch/app_routes.dart';
 import 'package:where_to_have_lunch/res/R.dart';
-import 'package:where_to_have_lunch/ui/base/bloc/bloc_state.dart';
+import 'package:where_to_have_lunch/ui/base/viewmodel/state_with_viewmodel.dart';
 import 'package:where_to_have_lunch/ui/choose/choose_page.dart';
 import 'package:where_to_have_lunch/ui/common/inner_navigator.dart';
-import 'package:where_to_have_lunch/ui/home/home_bloc.dart';
+import 'package:where_to_have_lunch/ui/home/home_viewmodel.dart';
 import 'package:where_to_have_lunch/ui/navigation_menu/bottom_menu_widget.dart';
 import 'package:where_to_have_lunch/ui/navigation_menu/lateral_menu_widget.dart';
 import 'package:where_to_have_lunch/ui/network_error/network_error_widget.dart';
@@ -16,7 +15,7 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends StateWithBloC<HomePage, HomeBloC> {
+class _HomePageState extends StateWithViewModel<HomePage, HomeViewModel> {
   int currentIndex = 0;
   final navigatorKey = GlobalKey<NavigatorState>();
 

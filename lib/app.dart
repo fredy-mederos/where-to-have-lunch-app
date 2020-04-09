@@ -3,8 +3,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:where_to_have_lunch/app_routes.dart';
 import 'package:where_to_have_lunch/res/text/custom_localizations_delegate.dart';
-import 'package:where_to_have_lunch/ui/base/bloc/bloc_state.dart';
-import 'package:where_to_have_lunch/ui/settings/configs_bloc.dart';
+import 'package:where_to_have_lunch/ui/base/viewmodel/state_with_viewmodel.dart';
+import 'package:where_to_have_lunch/ui/settings/configs_viewmodel.dart';
 
 import 'di/injector.dart';
 import 'domain/models/configs.dart';
@@ -15,18 +15,18 @@ class WhereToHaveLunchApp extends StatefulWidget {
   _WhereToHaveLunchAppState createState() => _WhereToHaveLunchAppState();
 }
 
-class _WhereToHaveLunchAppState extends StateWithBloC<WhereToHaveLunchApp, ConfigsBloC> {
+class _WhereToHaveLunchAppState extends StateWithViewModel<WhereToHaveLunchApp, ConfigsViewModel> {
   @override
   void initState() {
     super.initState();
-    bloc.loadConfigs();
+    viewModel.loadConfigs();
   }
 
   @override
   Widget buildWidget(BuildContext context) {
     final localizationDelegate = CustomLocalizationsDelegate();
     return StreamBuilder<Configs>(
-      stream: bloc.configsStream,
+      stream: viewModel.configsStream,
       builder: (context, snapshot) {
         final configs = snapshot.data;
         return configs == null

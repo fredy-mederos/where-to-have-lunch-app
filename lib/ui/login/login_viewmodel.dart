@@ -1,16 +1,16 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:where_to_have_lunch/domain/models/user.dart';
 import 'package:where_to_have_lunch/domain/repository/user_repository.dart';
-import 'package:where_to_have_lunch/ui/base/bloc/bloc_base.dart';
-import 'package:where_to_have_lunch/ui/base/bloc/bloc_error_handler.dart';
-import 'package:where_to_have_lunch/ui/base/bloc/bloc_loading.dart';
+import 'package:where_to_have_lunch/ui/base/viewmodel/base_viewmodel.dart';
+import 'package:where_to_have_lunch/ui/base/viewmodel/error_handler_viewmodel.dart';
+import 'package:where_to_have_lunch/ui/base/viewmodel/loading_viewmodel.dart';
 import 'package:where_to_have_lunch/utils/logger.dart';
 
-class LoginBloC with LoadingBloC, ErrorHandlerBloC implements BaseBloC {
+class LoginViewModel with LoadingViewModel, ErrorHandlerViewModel implements BaseViewModel {
   final UserRepository userRepository;
   final Logger logger;
 
-  LoginBloC(this.userRepository, this.logger);
+  LoginViewModel(this.userRepository, this.logger);
 
   PublishSubject<User> _onUserLoginController = PublishSubject();
 
@@ -31,7 +31,7 @@ class LoginBloC with LoadingBloC, ErrorHandlerBloC implements BaseBloC {
   @override
   void dispose() {
     _onUserLoginController.close();
-    disposeLoadingBloC();
-    disposeErrorHandlerBloC();
+    disposeLoadingViewModel();
+    disposeErrorHandlerViewModel();
   }
 }

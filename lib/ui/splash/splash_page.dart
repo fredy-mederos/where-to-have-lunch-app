@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:where_to_have_lunch/app_routes.dart';
-import 'package:where_to_have_lunch/ui/base/bloc/bloc_state.dart';
-import 'package:where_to_have_lunch/ui/splash/splash_bloc.dart';
+import 'package:where_to_have_lunch/ui/base/viewmodel/state_with_viewmodel.dart';
+import 'package:where_to_have_lunch/ui/splash/splash_viewmodel.dart';
 
 class SplashPage extends StatefulWidget {
   @override
   _SplashPageState createState() => _SplashPageState();
 }
 
-class _SplashPageState extends StateWithBloC<SplashPage, SplashBloC> {
+class _SplashPageState extends StateWithViewModel<SplashPage, SplashViewModel> {
   @override
   void initState() {
     super.initState();
-    bloc.isLoggedIn().then((isLoggedIn) {
+    viewModel.isLoggedIn().then((isLoggedIn) {
       if (isLoggedIn) {
         Navigator.pushReplacementNamed(context, AppRoutes.HOME);
       } else {

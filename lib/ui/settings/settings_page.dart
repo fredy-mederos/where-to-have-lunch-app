@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:where_to_have_lunch/app_routes.dart';
-import 'package:where_to_have_lunch/di/bloc_provider.dart';
+import 'package:where_to_have_lunch/di/viewmodel_provider.dart';
 import 'package:where_to_have_lunch/domain/models/configs.dart';
 import 'package:where_to_have_lunch/domain/models/user.dart';
 import 'package:where_to_have_lunch/res/R.dart';
-import 'package:where_to_have_lunch/ui/base/bloc/bloc_state.dart';
 import 'package:where_to_have_lunch/ui/base/icon_button_widget.dart';
 import 'package:where_to_have_lunch/ui/base/page_background_widget.dart';
-import 'package:where_to_have_lunch/ui/settings/configs_bloc.dart';
-import 'package:where_to_have_lunch/ui/settings/settings_bloc.dart';
+import 'package:where_to_have_lunch/ui/base/viewmodel/state_with_viewmodel.dart';
+import 'package:where_to_have_lunch/ui/settings/configs_viewmodel.dart';
+import 'package:where_to_have_lunch/ui/settings/settings_viewmodel.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
 
-class _SettingsPageState extends StateWithBloC<SettingsPage, SettingsBloC> {
-  ConfigsBloC blocConfigs;
+class _SettingsPageState extends StateWithViewModel<SettingsPage, SettingsViewModel> {
+  ConfigsViewModel configsViewModel;
 
   @override
   void initState() {
     super.initState();
-    blocConfigs = BlocProvider.of(context);
-    bloc.loadCurrentUser();
+    configsViewModel = ViewModelProvider.of(context);
+    viewModel.loadCurrentUser();
   }
 
   @override
@@ -67,7 +67,7 @@ class _SettingsPageState extends StateWithBloC<SettingsPage, SettingsBloC> {
       );
 
   Widget title() => StreamBuilder<User>(
-      stream: bloc.currentUserStream,
+      stream: viewModel.currentUserStream,
       builder: (context, snapshot) {
         final currentUser = snapshot.data;
         if (currentUser == null) return Container();
@@ -101,7 +101,7 @@ class _SettingsPageState extends StateWithBloC<SettingsPage, SettingsBloC> {
       });
 
   Widget configsCard() => StreamBuilder<Configs>(
-      stream: blocConfigs.configsStream,
+      stream: configsViewModel.configsStream,
       builder: (context, snapshot) {
         final config = snapshot.data;
         return Card(
@@ -117,7 +117,7 @@ class _SettingsPageState extends StateWithBloC<SettingsPage, SettingsBloC> {
                       Switch.adaptive(
                         value: config.darkMode,
                         onChanged: (value) {
-                          blocConfigs.setDarkMode(darkMode: value);
+                          configsViewModel.setDarkMode(darkMode: value);
                         },
                       ),
                   ],
@@ -129,7 +129,7 @@ class _SettingsPageState extends StateWithBloC<SettingsPage, SettingsBloC> {
       });
 
   void logOut() {
-    bloc.logout();
+    viewModel.logout();
     Navigator.pushNamedAndRemoveUntil(context, AppRoutes.LOGIN, (_) => false);
   }
 }

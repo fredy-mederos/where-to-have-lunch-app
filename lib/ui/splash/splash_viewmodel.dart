@@ -1,10 +1,10 @@
 import 'package:where_to_have_lunch/domain/repository/user_repository.dart';
-import 'package:where_to_have_lunch/ui/base/bloc/bloc_base.dart';
+import 'package:where_to_have_lunch/ui/base/viewmodel/base_viewmodel.dart';
 
-class SplashBloC extends BaseBloC {
+class SplashViewModel extends BaseViewModel {
   final UserRepository userRepository;
 
-  SplashBloC(this.userRepository);
+  SplashViewModel(this.userRepository);
 
   Future<bool> isLoggedIn() async {
     var currentUser = await userRepository.currentUser();

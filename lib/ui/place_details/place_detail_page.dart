@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:where_to_have_lunch/domain/models/place.dart';
-import 'package:where_to_have_lunch/ui/base/bloc/bloc_state.dart';
-import 'package:where_to_have_lunch/ui/place_details/place_details_bloc.dart';
+import 'package:where_to_have_lunch/ui/base/viewmodel/state_with_viewmodel.dart';
+import 'package:where_to_have_lunch/ui/place_details/place_details_viewmodel.dart';
 import 'package:where_to_have_lunch/ui/save_place/save_place_page.dart';
 import 'package:where_to_have_lunch/utils/navigation_utils.dart';
 
@@ -18,7 +18,7 @@ class PlaceDetailPage extends StatefulWidget {
   _PlaceDetailPageState createState() => _PlaceDetailPageState();
 }
 
-class _PlaceDetailPageState extends StateWithBloC<PlaceDetailPage, PlaceDetailsBloC> {
+class _PlaceDetailPageState extends StateWithViewModel<PlaceDetailPage, PlaceDetailsViewModel> {
   @override
   Widget buildWidget(BuildContext context) {
     return Scaffold(
@@ -64,7 +64,7 @@ class _PlaceDetailPageState extends StateWithBloC<PlaceDetailPage, PlaceDetailsB
           FlatButton(
             child: Text("Ok"),
             onPressed: () async {
-              await bloc.deleteItem(place: widget.place);
+              await viewModel.deleteItem(place: widget.place);
               Navigator.of(dialogContext).pop();
               Navigator.of(context).pop();
             },

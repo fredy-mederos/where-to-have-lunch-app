@@ -12,27 +12,27 @@ import 'package:where_to_have_lunch/data/stub/configs_repository_stub_impl.dart'
 import 'package:where_to_have_lunch/data/stub/is_connected_to_network_usecase_stub_impl.dart';
 import 'package:where_to_have_lunch/data/stub/place_repository_stub_impl.dart';
 import 'package:where_to_have_lunch/data/stub/user_repository_stub_impl.dart';
+import 'package:where_to_have_lunch/di/viewmodel_provider.dart';
 import 'package:where_to_have_lunch/domain/repository/configs_repository.dart';
 import 'package:where_to_have_lunch/domain/repository/place_color_repostitory.dart';
 import 'package:where_to_have_lunch/domain/repository/place_repository.dart';
 import 'package:where_to_have_lunch/domain/repository/user_repository.dart';
 import 'package:where_to_have_lunch/domain/usecase/is_connected_to_network_usecase.dart';
-import 'package:where_to_have_lunch/ui/home/home_bloc.dart';
-import 'package:where_to_have_lunch/ui/login/login_bloc.dart';
-import 'package:where_to_have_lunch/ui/network_error/network_error_bloc.dart';
-import 'package:where_to_have_lunch/ui/place_details/place_details_bloc.dart';
-import 'package:where_to_have_lunch/ui/places/places_bloc.dart';
-import 'package:where_to_have_lunch/ui/save_place/save_place_bloc.dart';
-import 'package:where_to_have_lunch/ui/settings/configs_bloc.dart';
-import 'package:where_to_have_lunch/ui/settings/settings_bloc.dart';
-import 'package:where_to_have_lunch/ui/splash/splash_bloc.dart';
+import 'package:where_to_have_lunch/ui/base/viewmodel/base_viewmodel.dart';
+import 'package:where_to_have_lunch/ui/home/home_viewmodel.dart';
+import 'package:where_to_have_lunch/ui/login/login_viewmodel.dart';
+import 'package:where_to_have_lunch/ui/network_error/network_error_viewmodel.dart';
+import 'package:where_to_have_lunch/ui/place_details/place_details_viewmodel.dart';
+import 'package:where_to_have_lunch/ui/places/places_viewmodel.dart';
+import 'package:where_to_have_lunch/ui/save_place/save_place_viewmodel.dart';
+import 'package:where_to_have_lunch/ui/settings/configs_viewmodel.dart';
+import 'package:where_to_have_lunch/ui/settings/settings_viewmodel.dart';
+import 'package:where_to_have_lunch/ui/splash/splash_viewmodel.dart';
 import 'package:where_to_have_lunch/utils/logger.dart';
 
-import '../ui/base/bloc/bloc_base.dart';
-
 ///Part dependency injector engine and Part service locator.
-///The main purpose of [Injector] is to provide bloCs instances and initialize the app components depending the current scope.
-///To reuse a bloc instance in the widget's tree feel free to use the [BlocProvider] mechanism.
+///The main purpose of [Injector] is to provide viewModels instances and initialize the app components depending the current scope.
+///To reuse a viewModel instance in the widget's tree feel free to use the [ViewModelProvider] mechanism.
 class Injector {
   ///Singleton instance
   static Injector instance;
@@ -49,8 +49,8 @@ class Injector {
   ///returns the current instance of the logger
   Logger getLogger() => container.resolve();
 
-  ///returns a new bloc instance
-  T getNewBloc<T extends BaseBloC>() => container.resolve();
+  ///returns a new viewModel instance
+  T getNewViewModel<T extends BaseViewModel>() => container.resolve();
 
   T getDependency<T>() => container.resolve();
 
@@ -66,7 +66,7 @@ class Injector {
     else if (mode == Mode.PROD) _registerProd(client);
 
     _registerCommon(client);
-    _registerBloCs(client);
+    _registerViewModels(client);
     _registerMappers(client);
   }
 
@@ -106,16 +106,16 @@ class Injector {
     container.registerFactory((_) => ConfigMapper());
   }
 
-  _registerBloCs(Client client) {
-    container.registerFactory((c) => LoginBloC(c.resolve(), c.resolve()));
-    container.registerFactory((c) => SplashBloC(c.resolve()));
-    container.registerFactory((_) => HomeBloC());
-    container.registerFactory((c) => SettingsBloC(c.resolve(), c.resolve(), c.resolve()));
-    container.registerFactory((c) => SavePlaceBloC(c.resolve(), c.resolve(), c.resolve()));
-    container.registerFactory((c) => ConfigsBloC(c.resolve()));
-    container.registerFactory((c) => PlacesBloC(c.resolve()));
-    container.registerFactory((c) => PlaceDetailsBloC(c.resolve()));
-    container.registerFactory((c) => NetworkErrorBloC(c.resolve()));
+  _registerViewModels(Client client) {
+    container.registerFactory((c) => LoginViewModel(c.resolve(), c.resolve()));
+    container.registerFactory((c) => SplashViewModel(c.resolve()));
+    container.registerFactory((_) => HomeViewModel());
+    container.registerFactory((c) => SettingsViewModel(c.resolve(), c.resolve(), c.resolve()));
+    container.registerFactory((c) => SavePlaceViewModel(c.resolve(), c.resolve(), c.resolve()));
+    container.registerFactory((c) => ConfigsViewModel(c.resolve()));
+    container.registerFactory((c) => PlacesViewModel(c.resolve()));
+    container.registerFactory((c) => PlaceDetailsViewModel(c.resolve()));
+    container.registerFactory((c) => NetworkErrorViewModel(c.resolve()));
   }
 
   _registerCommon(Client client) {
