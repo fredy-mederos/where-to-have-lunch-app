@@ -45,4 +45,6 @@ class StringsEs implements StringsBase {
   }
 
   String get youAreOffline => "Estas sin conexion";
+
+  String get demoMode => "Modo Demo";
 }
