@@ -9,7 +9,7 @@ import 'package:where_to_have_lunch/ui/base/viewmodel/base_viewmodel.dart';
 class ConfigsViewModel implements BaseViewModel {
   final DependencyProvider<ConfigsRepository> _configsRepository;
 
-  StreamSubscription<Configs> subscription;
+  StreamSubscription<Configs>? subscription;
 
   ConfigsViewModel(this._configsRepository);
 
@@ -24,13 +24,13 @@ class ConfigsViewModel implements BaseViewModel {
     });
   }
 
-  setDarkMode({bool darkMode}) async {
+  setDarkMode({required bool darkMode}) async {
     await _configsRepository().setDarkMode(darkMode: darkMode);
   }
 
   @override
   void dispose() {
     _configsController.close();
-    subscription.cancel();
+    subscription?.cancel();
   }
 }

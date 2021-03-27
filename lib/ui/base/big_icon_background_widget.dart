@@ -6,8 +6,8 @@ class BigIconBackgroundWidget extends StatelessWidget {
   final double rotateAngle;
 
   const BigIconBackgroundWidget({
-    Key key,
-    @required this.iconRes,
+    Key? key,
+    required this.iconRes,
     this.color = Colors.grey,
     this.rotateAngle = 8,
   }) : super(key: key);

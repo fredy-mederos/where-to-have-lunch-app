@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class NoOverScrollWidget extends StatelessWidget {
   final Widget child;
 
-  const NoOverScrollWidget({Key key, @required this.child}) : super(key: key);
+  const NoOverScrollWidget({Key? key, required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

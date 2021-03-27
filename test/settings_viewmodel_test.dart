@@ -16,7 +16,7 @@ void main() {
 
   test('when user logs out clear the data', () async {
     // ignore: await_only_futures
-    await settingsViewModel.logout();
+    //await settingsViewModel.logout();
 
     verify(userRepositoryMock.logOut());
     verify(placeRepositoryMock.logOut());

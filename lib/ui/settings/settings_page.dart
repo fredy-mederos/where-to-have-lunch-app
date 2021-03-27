@@ -17,7 +17,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends StateWithViewModel<SettingsPage, SettingsViewModel> {
-  ConfigsViewModel configsViewModel;
+  late ConfigsViewModel configsViewModel;
 
   @override
   void initState() {
@@ -66,7 +66,7 @@ class _SettingsPageState extends StateWithViewModel<SettingsPage, SettingsViewMo
         ),
       );
 
-  Widget title() => StreamBuilder<User>(
+  Widget title() => StreamBuilder<UserLocal>(
       stream: viewModel.currentUserStream,
       builder: (context, snapshot) {
         final currentUser = snapshot.data;
@@ -85,7 +85,7 @@ class _SettingsPageState extends StateWithViewModel<SettingsPage, SettingsViewMo
                 currentUser.photoUrl != null
                     ? CircleAvatar(
                         backgroundColor: Colors.transparent,
-                        backgroundImage: NetworkImage(currentUser.photoUrl),
+                        backgroundImage: NetworkImage(currentUser.photoUrl ?? ""),
                         radius: 40,
                       )
                     : Container(),

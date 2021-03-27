@@ -7,14 +7,14 @@ import 'package:where_to_have_lunch/utils/logger.dart';
 ///This state already setups a [ViewModel] as it's main child.
 abstract class StateWithViewModel<W extends StatefulWidget, B extends BaseViewModel> extends State<W> {
   ///Current viewModel instance
-  B viewModel;
-  Logger logger;
+  late B viewModel;
+  late Logger logger;
 
   @override
   void initState() {
     super.initState();
-    logger = Injector.instance.getLogger();
-    viewModel = Injector.instance.getNewViewModel();
+    logger = Injector.instance!.getLogger();
+    viewModel = Injector.instance!.getNewViewModel();
     logger.log('$runtimeType initState');
   }
 

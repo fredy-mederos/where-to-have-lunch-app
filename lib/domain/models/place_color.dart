@@ -9,9 +9,9 @@ class PlaceColor {
   final Color textColor;
 
   PlaceColor({
-    @required this.id,
-    @required this.name,
-    @required this.color,
-    @required this.textColor,
+    required this.id,
+    required this.name,
+    required this.color,
+    required this.textColor,
   });
 }

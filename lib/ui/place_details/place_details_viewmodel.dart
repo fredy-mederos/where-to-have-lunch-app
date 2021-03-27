@@ -9,7 +9,7 @@ class PlaceDetailsViewModel with LoadingViewModel implements BaseViewModel {
 
   PlaceDetailsViewModel(this._placeRepository);
 
-  Future deleteItem({@required Place place}) async {
+  Future deleteItem({required Place place}) async {
     isLoading = true;
     await _placeRepository.removePlace(place);
     isLoading = false;

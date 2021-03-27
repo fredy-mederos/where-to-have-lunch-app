@@ -8,9 +8,9 @@ class PageBackgroundWidget extends StatelessWidget {
   final double rotateAngle;
 
   const PageBackgroundWidget({
-    Key key,
-    @required this.child,
-    @required this.iconRes,
+    Key? key,
+    required this.child,
+    required this.iconRes,
     this.rotateAngle = 8,
   }) : super(key: key);
 

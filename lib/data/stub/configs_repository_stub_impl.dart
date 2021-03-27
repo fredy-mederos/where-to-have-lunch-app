@@ -12,12 +12,12 @@ class ConfigsRepositoryStubImpl implements ConfigsRepository {
   Future<Configs> getConfigs() {
     return Future.delayed(
       Duration(seconds: 0),
-      () => configsController.stream.value,
+      () => configsController.stream.value!,
     );
   }
 
   @override
-  Future setDarkMode({bool darkMode}) async {
+  Future setDarkMode({required bool darkMode}) async {
     return Future.delayed(Duration(seconds: 0), () {
       configsController.sinkAddSafe(Configs(darkMode: darkMode));
     });
@@ -27,7 +27,7 @@ class ConfigsRepositoryStubImpl implements ConfigsRepository {
   Stream<Configs> getConfigsStream() => configsController.stream;
 
   @override
-  Future logOut() {
+  Future logOut() async {
     configsController.close();
   }
 }

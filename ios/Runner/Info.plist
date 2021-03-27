@@ -41,16 +41,18 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-    <key>CFBundleURLTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleTypeRole</key>
-            <string>Editor</string>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>com.googleusercontent.apps.312758918068-56o50s9nr5a3donkshjq8d83u0sjqsv4</string>
-            </array>
-        </dict>
-    </array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>I need to use the photo library</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.312758918068-56o50s9nr5a3donkshjq8d83u0sjqsv4</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

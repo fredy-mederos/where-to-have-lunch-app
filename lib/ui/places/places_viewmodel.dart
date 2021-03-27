@@ -9,7 +9,7 @@ import 'package:where_to_have_lunch/ui/base/viewmodel/error_handler_viewmodel.da
 class PlacesViewModel with ErrorHandlerViewModel implements BaseViewModel {
   final PlaceRepository _placeRepository;
 
-  StreamSubscription<List<Place>> subscription;
+  StreamSubscription<List<Place>>? subscription;
 
   PlacesViewModel(this._placeRepository);
 

@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 
-class User {
+class UserLocal {
   final String name;
-  final String photoUrl;
+  final String? photoUrl;
 
-  User({@required this.name, this.photoUrl});
+  UserLocal({required this.name, this.photoUrl});
 }

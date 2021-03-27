@@ -40,12 +40,12 @@ class _WhereToHaveLunchAppState extends StateWithViewModel<WhereToHaveLunchApp, 
   }
 
   MaterialApp app({
-    @required Configs settings,
-    @required CustomLocalizationsDelegate localizationDelegate,
+    required Configs settings,
+    required CustomLocalizationsDelegate localizationDelegate,
   }) =>
       MaterialApp(
         title: R.string.appName,
-        debugShowCheckedModeBanner: Injector.instance.isInDebugMode(),
+        debugShowCheckedModeBanner: Injector.instance!.isInDebugMode(),
         theme: settings.darkMode ? _darkTheme : _lightTheme,
         localizationsDelegates: [
           localizationDelegate,

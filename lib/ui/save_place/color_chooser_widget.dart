@@ -6,9 +6,9 @@ class ColorChooserWidget extends StatefulWidget {
   final SelectedColorController selectedColorController;
 
   const ColorChooserWidget({
-    Key key,
-    @required this.colors,
-    @required this.selectedColorController,
+    Key? key,
+    required this.colors,
+    required this.selectedColorController,
   }) : super(key: key);
 
   @override
@@ -27,7 +27,7 @@ class _ColorChooserWidgetState extends State<ColorChooserWidget> {
       .map(
         (placeColor) => ColorItemWidget(
           placeColor: placeColor,
-          selected: widget.selectedColorController.selectedColor?.id == placeColor.id,
+          selected: widget.selectedColorController.selectedColor.id == placeColor.id,
           onTap: () {
             setState(() {
               widget.selectedColorController.selectedColor = placeColor;
@@ -41,13 +41,13 @@ class _ColorChooserWidgetState extends State<ColorChooserWidget> {
 class ColorItemWidget extends StatelessWidget {
   final PlaceColor placeColor;
   final bool selected;
-  final Function onTap;
+  final Function() onTap;
 
   const ColorItemWidget({
-    Key key,
-    @required this.placeColor,
+    Key? key,
+    required this.placeColor,
     this.selected = false,
-    @required this.onTap,
+    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -91,6 +91,6 @@ class SelectedColorController {
   PlaceColor selectedColor;
 
   SelectedColorController({
-    @required this.selectedColor,
+    required this.selectedColor,
   });
 }

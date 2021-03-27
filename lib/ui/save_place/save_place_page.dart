@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:where_to_have_lunch/domain/models/place.dart';
+import 'package:where_to_have_lunch/domain/models/place_color.dart';
 import 'package:where_to_have_lunch/res/R.dart';
 import 'package:where_to_have_lunch/ui/base/page_background_widget.dart';
 import 'package:where_to_have_lunch/ui/base/viewmodel/state_with_viewmodel.dart';
@@ -9,19 +10,19 @@ import 'package:where_to_have_lunch/ui/save_place/save_place_viewmodel.dart';
 import 'package:where_to_have_lunch/utils/validators.dart';
 
 class SavePlacePage extends StatefulWidget {
-  final Place place;
+  final Place? place;
 
-  const SavePlacePage({Key key, this.place}) : super(key: key);
+  const SavePlacePage({Key? key, this.place}) : super(key: key);
 
   @override
   _SavePlacePageState createState() => _SavePlacePageState();
 }
 
 class _SavePlacePageState extends StateWithViewModel<SavePlacePage, SavePlaceViewModel> {
-  TextEditingController nameFieldController;
-  TextEditingController descriptionFieldController;
+  TextEditingController? nameFieldController;
+  TextEditingController? descriptionFieldController;
   final formKey = GlobalKey<FormState>();
-  SelectedColorController selectedColorController;
+  late SelectedColorController selectedColorController;
 
   void initControllers() {
     selectedColorController = SelectedColorController(
@@ -36,17 +37,15 @@ class _SavePlacePageState extends StateWithViewModel<SavePlacePage, SavePlaceVie
     super.initState();
     initControllers();
     viewModel.onSavedStream.listen((place) {
-      if (place != null) {
-        Navigator.pop(context, place);
-      }
+      Navigator.pop(context, place);
     });
   }
 
   @override
   void dispose() {
     super.dispose();
-    nameFieldController.dispose();
-    descriptionFieldController.dispose();
+    nameFieldController?.dispose();
+    descriptionFieldController?.dispose();
   }
 
   @override
@@ -134,11 +133,11 @@ class _SavePlacePageState extends StateWithViewModel<SavePlacePage, SavePlaceVie
                   icon: Icon(Icons.save),
                   label: Text(R.string.save),
                   onPressed: () {
-                    if (formKey.currentState.validate()) {
+                    if (formKey.currentState?.validate()==true) {
                       viewModel.addPlace(
                         id: widget.place?.id,
-                        name: nameFieldController.text,
-                        description: descriptionFieldController.text,
+                        name: nameFieldController?.text ?? "",
+                        description: descriptionFieldController?.text ?? "",
                         placeColor: selectedColorController.selectedColor,
                       );
                     }

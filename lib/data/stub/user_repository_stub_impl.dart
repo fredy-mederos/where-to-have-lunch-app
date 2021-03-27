@@ -3,19 +3,19 @@ import 'package:where_to_have_lunch/domain/repository/user_repository.dart';
 
 @Deprecated("Do not use this in production")
 class UserRepositoryStubImpl implements UserRepository {
-  User _currentUser;
+  UserLocal? _currentUser;
 
   @override
-  Future<User> currentUser() async {
-    return _currentUser;
+  Future<UserLocal> currentUser() async {
+    return _currentUser!;
   }
 
   @override
-  Future<User> login() {
+  Future<UserLocal> login() {
     return Future.delayed(Duration(seconds: 2), () {
       //throw "Login Error";
-      _currentUser = User(name: "UserName");
-      return _currentUser;
+      _currentUser = UserLocal(name: "UserName");
+      return _currentUser!;
     });
   }
 

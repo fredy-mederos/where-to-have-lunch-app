@@ -12,13 +12,13 @@ class SettingsViewModel implements BaseViewModel {
 
   SettingsViewModel(this._userRepository, this._placeRepository, this._configsRepository);
 
-  PublishSubject<User> _currentUserController = PublishSubject();
+  PublishSubject<UserLocal> _currentUserController = PublishSubject();
 
-  Stream<User> get currentUserStream => _currentUserController.stream;
+  Stream<UserLocal> get currentUserStream => _currentUserController.stream;
 
   void loadCurrentUser() async {
     try {
-      User user = await _userRepository.currentUser();
+      UserLocal? user = await _userRepository.currentUser();
       _currentUserController.sinkAddSafe(user);
     } catch (ex) {}
   }

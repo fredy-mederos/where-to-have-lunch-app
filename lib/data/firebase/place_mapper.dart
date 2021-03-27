@@ -10,7 +10,7 @@ class PlaceMapper {
 
   PlaceMapper(this._placeColorRepository);
 
-  Place placeFromMap(Map map, String id) => Place(
+  Place placeFromMap(Map<String, dynamic> map, String id) => Place(
         id: id,
         name: map[FIELD_NAME],
         description: map[FILED_DESCRIPTION],

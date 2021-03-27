@@ -11,18 +11,16 @@ class ViewModelProvider<T> extends InheritedWidget {
   final Widget child;
 
   ViewModelProvider({
-    Key key,
-    @required this.viewModel,
-    @required this.child,
+    Key? key,
+    required this.viewModel,
+    required this.child,
   })  : assert(viewModel != null),
-        assert(child != null),
-        super(key: key);
+        super(key: key, child: child);
 
   /// Method that allows widgets to access the viewModel as long as their `BuildContext`
   /// contains a `ViewModelProvider` instance.
   static T of<T>(BuildContext context) {
-    final type = _typeOf<ViewModelProvider<T>>();
-    final ViewModelProvider<T> provider = context.ancestorInheritedElementForWidgetOfExactType(type)?.widget;
+    final ViewModelProvider<T> provider = context.findAncestorWidgetOfExactType<ViewModelProvider<T>>()!;
 
     if (provider == null) {
       throw FlutterError('ViewModelProvider.of() called with a context that does not contain a ViewModel of type $T.\n'
@@ -32,12 +30,8 @@ class ViewModelProvider<T> extends InheritedWidget {
           'The context used was:\n'
           '  $context');
     }
-    return provider?.viewModel;
+    return provider.viewModel;
   }
-
-  /// Necessary to obtain generic [Type]
-  /// https://github.com/dart-lang/sdk/issues/11923
-  static Type _typeOf<T>() => T;
 
   @override
   bool updateShouldNotify(ViewModelProvider oldWidget) => false;

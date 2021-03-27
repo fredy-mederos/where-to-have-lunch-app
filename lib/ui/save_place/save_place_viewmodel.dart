@@ -26,18 +26,18 @@ class SavePlaceViewModel with LoadingViewModel implements BaseViewModel {
   List<PlaceColor> getColors() => _placeColorRepository.getPlaceColors();
 
   addPlace({
-    @required String id,
-    @required String name,
-    @required String description,
-    @required PlaceColor placeColor,
+    String? id,
+    required String name,
+    required String description,
+    PlaceColor? placeColor,
   }) async {
     isLoading = true;
 
     final place = Place(
-      id: id,
+      id: id ?? "",
       name: name,
       description: description,
-      color: placeColor,
+      color: placeColor ?? _placeColorRepository.defaultPlaceColor(),
     );
     if (id == null) {
       await _placeRepository.addPlace(place);

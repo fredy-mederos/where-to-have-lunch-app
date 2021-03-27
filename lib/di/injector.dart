@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:where_to_have_lunch/data/demo/place_repository_demo_impl.dart';
 import 'package:where_to_have_lunch/data/demo/user_repository_demo_impl.dart';
@@ -40,11 +39,11 @@ import 'package:where_to_have_lunch/utils/logger.dart';
 ///To reuse a viewModel instance in the widget's tree feel free to use the [ViewModelProvider] mechanism.
 class Injector {
   ///Singleton instance
-  static Injector instance;
+  static Injector? instance;
 
-  Container _container = Container();
+  KiwiContainer _container = KiwiContainer();
 
-  Client _currentClient;
+  Client? _currentClient;
 
   ///Is the app in debug mode?
   bool isInDebugMode() {
@@ -61,22 +60,22 @@ class Injector {
 
   T getDependency<T>() => _container.resolve();
 
-  static resetMode({@required Mode mode}) {
-    instance._container.clear();
-    instance._registerDeps(mode: mode, client: instance._currentClient);
+  static resetMode({required Mode mode}) {
+    instance?._container.clear();
+    instance?._registerDeps(mode: mode, client: instance?._currentClient ?? Client.MOBILE);
   }
 
-  static init({@required Mode mode, @required Client client}) {
+  static init({required Mode mode, required Client client}) {
     if (instance == null) {
       instance = Injector._start(mode: mode, client: client);
     }
   }
 
-  Injector._start({@required Mode mode, @required Client client}) {
+  Injector._start({required Mode mode, required Client client}) {
     _registerDeps(mode: mode, client: client);
   }
 
-  _registerDeps({@required Mode mode, @required Client client}) {
+  _registerDeps({required Mode mode, required Client client}) {
     _currentClient = client;
 
     if (mode == Mode.STUB) _registerStub(client);
@@ -89,55 +88,55 @@ class Injector {
   }
 
   _registerDemo(Client client) {
-    _container.registerSingleton<UserRepository, UserRepositoryDemoImpl>(
+    _container.registerSingleton<UserRepository>(
       (_) => UserRepositoryDemoImpl(),
     );
-    _container.registerSingleton<PlaceRepository, PlaceRepositoryDemoImpl>(
+    _container.registerSingleton<PlaceRepository>(
       (c) => PlaceRepositoryDemoImpl(c.resolve(), c.resolve()),
     );
-    _container.registerSingleton<ConfigsRepository, ConfigsRepositoryStubImpl>(
+    _container.registerSingleton<ConfigsRepository>(
       (_) => ConfigsRepositoryStubImpl(),
     );
-    _container.registerFactory<IsConnectedToNetworkUseCase, IsConnectedToNetworkUseCaseConnectivityImpl>(
+    _container.registerFactory<IsConnectedToNetworkUseCase>(
       (_) => IsConnectedToNetworkUseCaseConnectivityImpl(),
     );
-    _container.registerFactory<ResetAppModeUseCase, ResetAppModeUseCaseImpl>(
+    _container.registerFactory<ResetAppModeUseCase>(
       (_) => ResetAppModeUseCaseImpl(),
     );
   }
 
   _registerStub(Client client) {
-    _container.registerSingleton<UserRepository, UserRepositoryStubImpl>(
+    _container.registerSingleton<UserRepository>(
       (_) => UserRepositoryStubImpl(),
     );
-    _container.registerSingleton<PlaceRepository, PlaceRepositoryStubImpl>(
+    _container.registerSingleton<PlaceRepository>(
       (c) => PlaceRepositoryStubImpl(c.resolve(), c.resolve()),
     );
-    _container.registerSingleton<ConfigsRepository, ConfigsRepositoryStubImpl>(
+    _container.registerSingleton<ConfigsRepository>(
       (_) => ConfigsRepositoryStubImpl(),
     );
-    _container.registerFactory<IsConnectedToNetworkUseCase, IsConnectedToNetworkUseCaseStubImpl>(
+    _container.registerFactory<IsConnectedToNetworkUseCase>(
       (_) => IsConnectedToNetworkUseCaseStubImpl(),
     );
-    _container.registerFactory<ResetAppModeUseCase, ResetAppModeUseCaseStubImpl>(
+    _container.registerFactory<ResetAppModeUseCase>(
       (_) => ResetAppModeUseCaseStubImpl(),
     );
   }
 
   _registerProd(Client client) {
-    _container.registerSingleton<UserRepository, UserRepositoryFirebaseImpl>(
+    _container.registerSingleton<UserRepository>(
       (c) => UserRepositoryFirebaseImpl(c.resolve(), c.resolve()),
     );
-    _container.registerSingleton<PlaceRepository, PlaceRepositoryFirebaseImpl>(
+    _container.registerSingleton<PlaceRepository>(
       (c) => PlaceRepositoryFirebaseImpl(c.resolve()),
     );
-    _container.registerSingleton<ConfigsRepository, ConfigsRepositoryFirebaseImpl>(
+    _container.registerSingleton<ConfigsRepository>(
       (c) => ConfigsRepositoryFirebaseImpl(c.resolve()),
     );
-    _container.registerFactory<IsConnectedToNetworkUseCase, IsConnectedToNetworkUseCaseConnectivityImpl>(
+    _container.registerFactory<IsConnectedToNetworkUseCase>(
       (_) => IsConnectedToNetworkUseCaseConnectivityImpl(),
     );
-    _container.registerFactory<ResetAppModeUseCase, ResetAppModeUseCaseImpl>(
+    _container.registerFactory<ResetAppModeUseCase>(
       (_) => ResetAppModeUseCaseImpl(),
     );
   }
@@ -162,14 +161,14 @@ class Injector {
 
   _registerCommon(Client client) {
     if (isInDebugMode()) {
-      _container.registerFactory<Logger, LoggerImpl>((_) => LoggerImpl());
+      _container.registerFactory<Logger>((_) => LoggerImpl());
     } else {
-      _container.registerFactory<Logger, LoggerEmptyImpl>(
+      _container.registerFactory<Logger>(
         (_) => LoggerEmptyImpl(),
       );
     }
 
-    _container.registerFactory<PlaceColorRepository, PlaceColorRepositoryImpl>(
+    _container.registerFactory<PlaceColorRepository>(
       (_) => PlaceColorRepositoryImpl(),
     );
   }

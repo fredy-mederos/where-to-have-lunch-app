@@ -10,4 +10,4 @@ class PlaceRepositoryMockImpl extends Mock implements PlaceRepository {}
 
 class ConfigsRepositoryMockImpl extends Mock implements ConfigsRepository {}
 
-class UserMock extends Mock implements User {}
+class UserMock extends Mock implements UserLocal {}

@@ -4,7 +4,7 @@ import 'package:where_to_have_lunch/utils/extensions.dart';
 class ErrorHandlerViewModel {
   BehaviorSubject<String> _errorMessageController = new BehaviorSubject();
 
-  Stream<String> get errorMessageStream => _errorMessageController.stream;
+  Stream<String?> get errorMessageStream => _errorMessageController.stream;
 
   onError(dynamic error) {
     if (error != null)

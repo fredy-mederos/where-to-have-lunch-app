@@ -16,7 +16,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends StateWithViewModel<LoginPage, LoginViewModel> {
-  ConfigsViewModel configsViewModel;
+  late ConfigsViewModel configsViewModel;
 
   @override
   void initState() {
@@ -69,19 +69,19 @@ class _LoginPageState extends StateWithViewModel<LoginPage, LoginViewModel> {
                 stream: viewModel.isLoadingStream,
                 initialData: false,
                 builder: (context, snapshot) {
-                  return loginSection(isLoading: snapshot.data);
+                  return loginSection(isLoading: snapshot.data ?? false);
                 }),
           ],
         ),
       );
 
-  Widget loginButton({bool isLoading}) => IconButtonWidget(
+  Widget loginButton({required bool isLoading}) => IconButtonWidget(
         iconData: MdiIcons.google,
         label: R.string.loginWithGoogle,
         onPressed: isLoading ? null : viewModel.login,
       );
 
-  Widget demoButton({bool isLoading}) => SizedBox(
+  Widget demoButton({required bool isLoading}) => SizedBox(
         width: 200,
         child: RaisedButton(
           onPressed: isLoading ? null : viewModel.enterInDemoMode,
@@ -89,7 +89,7 @@ class _LoginPageState extends StateWithViewModel<LoginPage, LoginViewModel> {
         ),
       );
 
-  Widget loginSection({bool isLoading}) {
+  Widget loginSection({required bool isLoading}) {
     return Column(
       children: [
         isLoading ? CircularProgressIndicator() : Container(),

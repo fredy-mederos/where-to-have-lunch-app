@@ -15,9 +15,9 @@ class LoginViewModel with LoadingViewModel, ErrorHandlerViewModel implements Bas
 
   LoginViewModel(this._userRepositoryProvider, this.logger, this._resetAppModeUseCase);
 
-  PublishSubject<User> _onUserLoginController = PublishSubject();
+  PublishSubject<UserLocal> _onUserLoginController = PublishSubject();
 
-  Stream<User> get onUserLogin => _onUserLoginController.stream;
+  Stream<UserLocal> get onUserLogin => _onUserLoginController.stream;
 
   void login() async {
     _resetAppModeUseCase.changeToProductionMode();

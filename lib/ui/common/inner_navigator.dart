@@ -5,9 +5,9 @@ class InnerNavigator extends StatelessWidget {
   final Widget child;
 
   const InnerNavigator({
-    Key key,
-    @required this.navigatorKey,
-    @required this.child,
+    Key? key,
+    required this.navigatorKey,
+    required this.child,
   }) : super(key: key);
 
   @override

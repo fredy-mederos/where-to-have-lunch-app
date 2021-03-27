@@ -31,10 +31,10 @@ class _HomePageState extends StateWithViewModel<HomePage, HomeViewModel> {
       return tabletLayout();
   }
 
-  Widget getBody({Widget child}) => WillPopScope(
+  Widget getBody({required Widget child}) => WillPopScope(
         onWillPop: () async {
           if (currentIndex != 1) return true;
-          return !await navigatorKey.currentState.maybePop();
+          return !(await navigatorKey.currentState?.maybePop() == true);
         },
         child: child,
       );

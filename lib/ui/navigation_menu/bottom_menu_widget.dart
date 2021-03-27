@@ -7,9 +7,9 @@ class BottomMenuWidget extends StatelessWidget {
   final int currentPage;
 
   const BottomMenuWidget({
-    Key key,
-    @required this.onPageSelected,
-    @required this.currentPage,
+    Key? key,
+    required this.onPageSelected,
+    required this.currentPage,
   }) : super(key: key);
 
   @override

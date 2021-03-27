@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 class IconButtonWidget extends StatelessWidget {
-  final Function onPressed;
+  final Function()? onPressed;
   final String label;
   final IconData iconData;
 
   const IconButtonWidget({
-    Key key,
-    @required this.onPressed,
-    @required this.label,
-    @required this.iconData,
+    Key? key,
+    this.onPressed,
+    required this.label,
+    required this.iconData,
   }) : super(key: key);
 
   @override

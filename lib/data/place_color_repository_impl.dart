@@ -64,10 +64,15 @@ class PlaceColorRepositoryImpl implements PlaceColorRepository {
   }
 
   @override
-  PlaceColor getPlaceColorById({String id}) {
+  PlaceColor defaultPlaceColor() {
+    return getPlaceColors()[0];
+  }
+
+  @override
+  PlaceColor getPlaceColorById({required String id}) {
     return getPlaceColors().firstWhere(
       (item) => item.id == id,
-      orElse: () => getPlaceColors()[0],
+      orElse: () => defaultPlaceColor(),
     );
   }
 }

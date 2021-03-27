@@ -8,9 +8,9 @@ class LateralMenuWidget extends StatelessWidget {
   final int currentPage;
 
   const LateralMenuWidget({
-    Key key,
-    @required this.onPageSelected,
-    @required this.currentPage,
+    Key? key,
+    required this.onPageSelected,
+    required this.currentPage,
   }) : super(key: key);
 
   @override
