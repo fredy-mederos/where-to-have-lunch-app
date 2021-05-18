@@ -34,14 +34,14 @@ class PlaceRepositoryDemoImpl implements PlaceRepository {
   @override
   Future<List<Place>> getPlaces() async {
     return Future.delayed(Duration(seconds: 2), () async {
-      return new List.from(placesController.stream.value!);
+      return new List.from(placesController.stream.value);
     });
   }
 
   @override
   Future removePlace(Place place) {
     return Future.delayed(Duration(seconds: 0), () async {
-      final places = placesController.stream.value!;
+      final places = placesController.stream.value;
       places.remove(place);
       placesController.sinkAddSafe(places);
     });
@@ -52,7 +52,7 @@ class PlaceRepositoryDemoImpl implements PlaceRepository {
     return Future.delayed(Duration(seconds: 2), () async {
       place.id = Uuid().v4();
       try {
-        final places = placesController.stream.value!;
+        final places = placesController.stream.value;
         places.add(place);
         placesController.sinkAddSafe(places);
       } catch (ex) {
@@ -64,7 +64,7 @@ class PlaceRepositoryDemoImpl implements PlaceRepository {
   @override
   Future savePlace(Place place) {
     return Future.delayed(Duration(seconds: 2), () async {
-      final places = placesController.stream.value!;
+      final places = placesController.stream.value;
       final index = places.indexWhere((item) => item.id == place.id);
       if (index != -1) {
         places.removeAt(index);

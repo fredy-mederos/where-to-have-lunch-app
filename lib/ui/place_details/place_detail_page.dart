@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:where_to_have_lunch/domain/models/place.dart';
+import 'package:where_to_have_lunch/res/R.dart';
 import 'package:where_to_have_lunch/ui/base/viewmodel/state_with_viewmodel.dart';
 import 'package:where_to_have_lunch/ui/place_details/place_details_viewmodel.dart';
 import 'package:where_to_have_lunch/ui/save_place/save_place_page.dart';
@@ -59,7 +60,7 @@ class _PlaceDetailPageState extends StateWithViewModel<PlaceDetailPage, PlaceDet
       context: context,
       barrierDismissible: false,
       builder: (dialogContext) => AlertDialog(
-        title: Text("Do you want to delete this place?"),
+        title: Text(R.string.deletePlaceConfirmation),
         actions: [
           FlatButton(
             child: Text("Ok"),

@@ -12,7 +12,7 @@ class ConfigsRepositoryStubImpl implements ConfigsRepository {
   Future<Configs> getConfigs() {
     return Future.delayed(
       Duration(seconds: 0),
-      () => configsController.stream.value!,
+      () => configsController.stream.value,
     );
   }
 

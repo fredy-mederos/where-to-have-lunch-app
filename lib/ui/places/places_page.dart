@@ -110,7 +110,7 @@ class _PlacesPageState extends StateWithViewModel<PlacesPage, PlacesViewModel> {
     NavigatorUtils.push(context, PlaceDetailPage(place: place));
   }
 
-  void addPlace() {
-    NavigatorUtils.push(context, SavePlacePage());
+  void addPlace() async {
+    Place? savedPlace = await NavigatorUtils.push(context, SavePlacePage());
   }
 }

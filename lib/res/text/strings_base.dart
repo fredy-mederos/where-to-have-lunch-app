@@ -37,6 +37,8 @@ abstract class StringsBase implements WidgetsLocalizations {
 
   String get youAreOffline;
 
+  String get deletePlaceConfirmation;
+
   String helloUser(String userName);
 
   String get demoMode;

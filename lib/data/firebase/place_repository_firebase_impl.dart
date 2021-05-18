@@ -25,7 +25,7 @@ class PlaceRepositoryFirebaseImpl extends FirebaseAuthRepositoryImpl implements 
   void loadData() async {
     final api = await getApi();
     api.streamDataCollection().listen((data) {
-      final places = data.docs.map((item) => placeMapper.placeFromMap(item.data() ?? {}, item.id)).toList();
+      final places = data.docs.map((item) => placeMapper.placeFromMap(item.data(), item.id)).toList();
       placesController.sink.add(places);
     });
   }
@@ -47,7 +47,7 @@ class PlaceRepositoryFirebaseImpl extends FirebaseAuthRepositoryImpl implements 
     final data = await api.getDataCollection();
     return data.docs
         .map(
-          (item) => placeMapper.placeFromMap(item.data() ?? {}, item.id),
+          (item) => placeMapper.placeFromMap(item.data(), item.id),
         )
         .toList();
   }

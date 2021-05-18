@@ -47,4 +47,7 @@ class StringsEn implements StringsBase {
   String get youAreOffline => "You are offline";
 
   String get demoMode => "Demo Mode";
+
+  @override
+  String get deletePlaceConfirmation => "Do you want to delete this place?";
 }
