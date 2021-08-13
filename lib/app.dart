@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:where_to_have_lunch/app_routes.dart';
-import 'package:where_to_have_lunch/res/text/custom_localizations_delegate.dart';
 import 'package:where_to_have_lunch/ui/base/viewmodel/state_with_viewmodel.dart';
 import 'package:where_to_have_lunch/ui/settings/configs_viewmodel.dart';
 
 import 'di/injector.dart';
 import 'domain/models/configs.dart';
+import 'generated/l10n.dart';
 import 'res/R.dart';
 
 class WhereToHaveLunchApp extends StatefulWidget {
@@ -24,7 +24,6 @@ class _WhereToHaveLunchAppState extends StateWithViewModel<WhereToHaveLunchApp, 
 
   @override
   Widget buildWidget(BuildContext context) {
-    final localizationDelegate = CustomLocalizationsDelegate();
     return StreamBuilder<Configs>(
       stream: viewModel.configsStream,
       builder: (context, snapshot) {
@@ -32,33 +31,26 @@ class _WhereToHaveLunchAppState extends StateWithViewModel<WhereToHaveLunchApp, 
         return configs == null
             ? Container()
             : app(
-                settings: configs,
-                localizationDelegate: localizationDelegate,
+                settings: configs
               );
       },
     );
   }
 
   MaterialApp app({
-    required Configs settings,
-    required CustomLocalizationsDelegate localizationDelegate,
+    required Configs settings
   }) =>
       MaterialApp(
-        title: R.string.appName,
+        title: "Where to have lunch",
         debugShowCheckedModeBanner: Injector.instance!.isInDebugMode(),
         theme: settings.darkMode ? _darkTheme : _lightTheme,
         localizationsDelegates: [
-          localizationDelegate,
+          S.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate
         ],
-        supportedLocales: localizationDelegate.supportedLocales,
-        localeResolutionCallback: localizationDelegate.resolution(
-          fallback: Locale(
-            "en",
-          ), //todo the selected language could be included also in the configs settings
-        ),
+        supportedLocales: S.delegate.supportedLocales,
         initialRoute: AppRoutes.SPLASH,
         routes: AppRoutes.routes(),
       );

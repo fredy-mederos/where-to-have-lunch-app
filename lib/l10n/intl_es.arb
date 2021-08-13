@@ -1,0 +1,22 @@
+{
+  "hello_world": "Hello World!",
+  "appName": "Donde Almorzar?",
+  "loginWithGoogle": "Entra con Google",
+  "welcomeMessageBody": "La forma mas facil de escoger donde tener un buen almuerzo con tus colegas",
+  "welcomeMessageTitle": "Bienvenido a \"Donde Almorzar?\"",
+  "places": "Lugares",
+  "settings": "Configuracion",
+  "choose": "Elegir!",
+  "addAPlace": "Anadir un lugar",
+  "requiredField": "Campo requerido.",
+  "placeName": "Nombre del lugar",
+  "description": "Descripcion",
+  "save": "Guardar",
+  "addPlace": "Anadir lugar",
+  "darkTheme": "Tema oscuro",
+  "yourPlaces": "Tus lugares",
+  "editPlace": "Editar Lugar",
+  "helloUser": "Hola {user}",
+  "youAreOffline": "Estas sin conexion",
+  "demoMode": "Modo Demo"
+}

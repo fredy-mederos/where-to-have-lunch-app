@@ -85,7 +85,7 @@ class _SettingsPageState extends StateWithViewModel<SettingsPage, SettingsViewMo
                 currentUser.photoUrl != null
                     ? CircleAvatar(
                         backgroundColor: Colors.transparent,
-                        backgroundImage: NetworkImage(currentUser.photoUrl ?? ""),
+                        backgroundImage: NetworkImage(currentUser.photoUrl!),
                         radius: 40,
                       )
                     : Container(),
