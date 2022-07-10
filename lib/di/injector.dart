@@ -30,6 +30,7 @@ import 'package:where_to_have_lunch/ui/network_error/network_error_viewmodel.dar
 import 'package:where_to_have_lunch/ui/place_details/place_details_viewmodel.dart';
 import 'package:where_to_have_lunch/ui/places/places_bloc.dart';
 import 'package:where_to_have_lunch/ui/places/places_viewmodel.dart';
+import 'package:where_to_have_lunch/ui/save_place/save_place_bloc.dart';
 import 'package:where_to_have_lunch/ui/save_place/save_place_viewmodel.dart';
 import 'package:where_to_have_lunch/ui/settings/configs_viewmodel.dart';
 import 'package:where_to_have_lunch/ui/settings/settings_viewmodel.dart';
@@ -166,6 +167,7 @@ class Injector {
 
   _registerBloCs(Client client){
     _container.registerFactory((c) => PlacesBloC(c.resolve()));
+    _container.registerFactory((c) => SavePlaceBloC(c.resolve(), c.resolve()));
   }
 
   _registerCommon(Client client) {
