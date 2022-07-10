@@ -1,3 +1,4 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:where_to_have_lunch/data/demo/place_repository_demo_impl.dart';
 import 'package:where_to_have_lunch/data/demo/user_repository_demo_impl.dart';
@@ -27,6 +28,7 @@ import 'package:where_to_have_lunch/ui/home/home_viewmodel.dart';
 import 'package:where_to_have_lunch/ui/login/login_viewmodel.dart';
 import 'package:where_to_have_lunch/ui/network_error/network_error_viewmodel.dart';
 import 'package:where_to_have_lunch/ui/place_details/place_details_viewmodel.dart';
+import 'package:where_to_have_lunch/ui/places/places_bloc.dart';
 import 'package:where_to_have_lunch/ui/places/places_viewmodel.dart';
 import 'package:where_to_have_lunch/ui/save_place/save_place_viewmodel.dart';
 import 'package:where_to_have_lunch/ui/settings/configs_viewmodel.dart';
@@ -58,6 +60,8 @@ class Injector {
   ///returns a new viewModel instance
   T getNewViewModel<T extends BaseViewModel>() => _container.resolve();
 
+  B getNewBloC<B extends BlocBase>() => _container.resolve();
+
   T getDependency<T>() => _container.resolve();
 
   static resetMode({required Mode mode}) {
@@ -84,6 +88,7 @@ class Injector {
 
     _registerCommon(client);
     _registerViewModels(client);
+    _registerBloCs(client);
     _registerMappers(client);
   }
 
@@ -157,6 +162,10 @@ class Injector {
     _container.registerFactory((c) => PlacesViewModel(c.resolve()));
     _container.registerFactory((c) => PlaceDetailsViewModel(c.resolve()));
     _container.registerFactory((c) => NetworkErrorViewModel(c.resolve()));
+  }
+
+  _registerBloCs(Client client){
+    _container.registerFactory((c) => PlacesBloC(c.resolve()));
   }
 
   _registerCommon(Client client) {

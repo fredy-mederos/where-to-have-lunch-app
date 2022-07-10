@@ -20,15 +20,15 @@ class BottomMenuWidget extends StatelessWidget {
       items: [
         BottomNavigationBarItem(
           icon: Icon(MdiIcons.dice5Outline),
-          title: Text(R.string.choose),
+          label: R.string.choose,
         ),
         BottomNavigationBarItem(
           icon: Icon(MdiIcons.silverwareVariant),
-          title: Text(R.string.places),
+          label: R.string.places,
         ),
         BottomNavigationBarItem(
           icon: Icon(MdiIcons.cog),
-          title: Text(R.string.settings),
+          label: R.string.settings,
         ),
       ],
     );
