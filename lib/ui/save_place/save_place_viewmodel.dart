@@ -8,6 +8,7 @@ import 'package:where_to_have_lunch/ui/base/viewmodel/base_viewmodel.dart';
 import 'package:where_to_have_lunch/ui/base/viewmodel/loading_viewmodel.dart';
 import 'package:where_to_have_lunch/utils/logger.dart';
 
+@Deprecated("Use SavePlaceBloC instead")
 class SavePlaceViewModel with LoadingViewModel implements BaseViewModel {
   final PlaceRepository _placeRepository;
   final PlaceColorRepository _placeColorRepository;

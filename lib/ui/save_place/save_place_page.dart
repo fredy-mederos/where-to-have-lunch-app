@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:where_to_have_lunch/di/state_with_bloc.dart';
 import 'package:where_to_have_lunch/domain/models/place.dart';
-import 'package:where_to_have_lunch/domain/models/place_color.dart';
 import 'package:where_to_have_lunch/res/R.dart';
 import 'package:where_to_have_lunch/ui/base/page_background_widget.dart';
-import 'package:where_to_have_lunch/ui/base/viewmodel/state_with_viewmodel.dart';
 import 'package:where_to_have_lunch/ui/save_place/color_chooser_widget.dart';
-import 'package:where_to_have_lunch/ui/save_place/save_place_viewmodel.dart';
+import 'package:where_to_have_lunch/ui/save_place/save_place_bloc.dart';
 import 'package:where_to_have_lunch/utils/validators.dart';
 
 class SavePlacePage extends StatefulWidget {
@@ -18,7 +17,7 @@ class SavePlacePage extends StatefulWidget {
   _SavePlacePageState createState() => _SavePlacePageState();
 }
 
-class _SavePlacePageState extends StateWithViewModel<SavePlacePage, SavePlaceViewModel> {
+class _SavePlacePageState extends StateWithBloC<SavePlacePage, SavePlaceState, SavePlaceBloC> {
   TextEditingController? nameFieldController;
   TextEditingController? descriptionFieldController;
   final formKey = GlobalKey<FormState>();
@@ -26,7 +25,7 @@ class _SavePlacePageState extends StateWithViewModel<SavePlacePage, SavePlaceVie
 
   void initControllers() {
     selectedColorController = SelectedColorController(
-      selectedColor: widget.place?.color ?? viewModel.getColors()[0],
+      selectedColor: widget.place?.color,
     );
     nameFieldController = TextEditingController(text: widget.place?.name ?? "");
     descriptionFieldController = TextEditingController(text: widget.place?.description ?? "");
@@ -36,9 +35,6 @@ class _SavePlacePageState extends StateWithViewModel<SavePlacePage, SavePlaceVie
   void initState() {
     super.initState();
     initControllers();
-    viewModel.onSavedStream.listen((place) {
-      Navigator.pop(context, place);
-    });
   }
 
   @override
@@ -49,7 +45,14 @@ class _SavePlacePageState extends StateWithViewModel<SavePlacePage, SavePlaceVie
   }
 
   @override
-  Widget buildWidget(BuildContext context) {
+  onNewState(BuildContext context, SavePlaceState state) {
+    if (state.status == SaveStatus.FINISHED && state.currentPlace != null) {
+      Navigator.pop(context, state.currentPlace);
+    }
+  }
+
+  @override
+  Widget buildWidget(BuildContext context, SavePlaceState state) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -61,14 +64,14 @@ class _SavePlacePageState extends StateWithViewModel<SavePlacePage, SavePlaceVie
           child: PageBackgroundWidget(
             iconRes: MdiIcons.silverwareVariant,
             rotateAngle: 0,
-            child: body(),
+            child: body(state),
           ),
         ),
       ),
     );
   }
 
-  Widget body() => Column(
+  Widget body(SavePlaceState state) => Column(
         children: [
           Text(
             widget.place == null ? R.string.addPlace : R.string.editPlace,
@@ -103,14 +106,14 @@ class _SavePlacePageState extends StateWithViewModel<SavePlacePage, SavePlaceVie
                     ),
                     Container(height: 10),
                     ColorChooserWidget(
-                      colors: viewModel.getColors(),
+                      colors: state.colors,
                       selectedColorController: selectedColorController,
                     ),
                     Container(height: 10),
                     Row(
                       children: [
                         Expanded(child: Container()),
-                        saveButton(),
+                        saveButton(state),
                       ],
                     )
                   ],
@@ -121,28 +124,23 @@ class _SavePlacePageState extends StateWithViewModel<SavePlacePage, SavePlaceVie
         ],
       );
 
-  Widget saveButton() => StreamBuilder<bool>(
-        stream: viewModel.isLoadingStream,
-        initialData: false,
-        builder: (context, snapshot) {
-          final isLoading = snapshot.data ?? false;
-
-          return isLoading
-              ? CircularProgressIndicator()
-              : RaisedButton.icon(
-                  icon: Icon(Icons.save),
-                  label: Text(R.string.save),
-                  onPressed: () {
-                    if (formKey.currentState?.validate()==true) {
-                      viewModel.addPlace(
-                        id: widget.place?.id,
-                        name: nameFieldController?.text ?? "",
-                        description: descriptionFieldController?.text ?? "",
-                        placeColor: selectedColorController.selectedColor,
-                      );
-                    }
-                  },
+  Widget saveButton(SavePlaceState state) {
+    final isLoading = state.loading;
+    return isLoading
+        ? CircularProgressIndicator()
+        : RaisedButton.icon(
+            icon: Icon(Icons.save),
+            label: Text(R.string.save),
+            onPressed: () {
+              if (formKey.currentState?.validate() == true) {
+                bloC.addPlace(
+                  id: widget.place?.id,
+                  name: nameFieldController?.text ?? "",
+                  description: descriptionFieldController?.text ?? "",
+                  placeColor: selectedColorController.selectedColor,
                 );
-        },
-      );
+              }
+            },
+          );
+  }
 }

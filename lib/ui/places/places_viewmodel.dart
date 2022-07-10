@@ -6,6 +6,7 @@ import 'package:where_to_have_lunch/domain/repository/place_repository.dart';
 import 'package:where_to_have_lunch/ui/base/viewmodel/base_viewmodel.dart';
 import 'package:where_to_have_lunch/ui/base/viewmodel/error_handler_viewmodel.dart';
 
+@Deprecated("Use Places Page with it's BloC")
 class PlacesViewModel with ErrorHandlerViewModel implements BaseViewModel {
   final PlaceRepository _placeRepository;
 
